@@ -1,7 +1,6 @@
 package com.example.demo.collection;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.model.Estudante;
@@ -12,7 +11,12 @@ public class EstudanteCollection {
     @Autowired
     private EstudanteRepository estudanteRepository;
 
-    public Estudante consultarEstudante(String cpf, String senha) {
+    public Estudante loginEstudante(String cpf, String senha) {
+        // alterar no diagrama, acredito que faz mais sentido ser passado as informações do estudante para o Service;
         return estudanteRepository.findByCpfAndSenha(cpf, senha);
+    }
+
+    public void cadastrarEstudante(Estudante estudante) {
+        estudanteRepository.save(estudante);
     }
 }
