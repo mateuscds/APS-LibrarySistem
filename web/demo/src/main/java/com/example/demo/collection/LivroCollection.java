@@ -13,11 +13,13 @@ public class LivroCollection {
     @Autowired
     LivroRepository livroRepository;
 
-    public void adicionarLivro(Livro livro) {
+    public String adicionarLivro(Livro livro) {
         Livro livros = livroRepository.findByNomeAndEdicao(livro.getNome(), livro.getEdicao());
         if (livros == null) {
             livroRepository.save(livro);
+            return "100";
         }
+        return "livro já cadastrado";
     }
 
     public void atualizarEstoque(Livro livro) {
@@ -31,15 +33,22 @@ public class LivroCollection {
         return livroRepository.findAll();
     }
 
-    public boolean reservarLivroById(Long id) {
+    public Livro reservarLivroById(Long id) {
         Livro livro_bd = livroRepository.getReferenceById(id);
         if (livro_bd.getQuantidade() > 0) {
             livro_bd.setQuantidade(livro_bd.getQuantidade()-1);
 
             livroRepository.save(livro_bd);
-            return true;
+            return livro_bd;
         }
         
-        return false;
+        return null;
+    }
+
+    public void devolverLivroById(Long id) {
+        Livro livro_bd = livroRepository.getReferenceById(id);
+        livro_bd.setQuantidade(livro_bd.getQuantidade()+1);
+
+        livroRepository.save(livro_bd);
     }
 }

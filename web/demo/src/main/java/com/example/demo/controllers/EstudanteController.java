@@ -1,14 +1,18 @@
 package com.example.demo.controllers;
 
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.example.demo.Facade;
+import com.example.demo.model.Emprestimo;
 import com.example.demo.model.Estudante;
 
 @Controller
@@ -19,16 +23,16 @@ public class EstudanteController {
 
     @GetMapping("/estudante")
     public ModelAndView home(HttpSession session) {
-        String nome = (String) session.getAttribute("nome");
         String curso = (String) session.getAttribute("curso");
+        Long idEstudante = (Long) session.getAttribute("id");
 
-        if(nome == null) {
+        if(curso == null) {
             return new ModelAndView("redirect:/estudante/login");
         } else {
-            ModelAndView mv = new ModelAndView("estudante/home");
-            mv.addObject("nome", nome);
-            mv.addObject("curso", curso);
+            List<Emprestimo> emps = facade.buscarEmprestimoPorEstudante(idEstudante);
 
+            ModelAndView mv = new ModelAndView("estudante/home");
+            mv.addObject("emprestimos", emps);
             return mv;
         }
     }
@@ -73,4 +77,14 @@ public class EstudanteController {
             return mv;
         }
     }
+
+    @GetMapping("/estudante/{livroId}/devolverlivro")
+    public ModelAndView devolverLivro(@PathVariable Long livroId, HttpSession session) {
+        Object estudanteId = session.getAttribute("id"); 
+
+        facade.devolverLivro(Long.parseLong(String.valueOf(estudanteId)), livroId);
+        ModelAndView mv = new ModelAndView("redirect:/livros"); 
+        return mv;
+    }
+
 }
