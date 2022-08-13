@@ -36,11 +36,14 @@ public class EstudanteController {
     @PostMapping("/estudante/login")
     public ModelAndView loginEstudante(String cpf, String senha, HttpSession session) {
         Estudante estudante = facade.loginEstudante(cpf, senha);
-        
+        System.out.println("Aentrei aqui");
         if (estudante != null) {
             session.setAttribute("nome", estudante.getNome());
+            session.setAttribute("cpf", estudante.getCpf());
             session.setAttribute("curso", estudante.getCurso());
-            return new ModelAndView("redirect:/estudante");
+            session.setAttribute("id", estudante.getId());
+            session.setAttribute("tipo", "estudante");
+            return new ModelAndView("redirect:/livros");
         } else {
             ModelAndView mv = new ModelAndView("redirect:/estudante/login");
             mv.addObject("error", "login");
@@ -53,4 +56,21 @@ public class EstudanteController {
         return new ModelAndView("estudante/estudante");
     }
 
+    @GetMapping("/estudante/cadastro")
+    public ModelAndView showCadastro() {
+        return new ModelAndView("estudante/cadastro");
+    }
+
+    @PostMapping("/estudante/cadastro")
+    public ModelAndView showCadastro(String nome, String cpf, String curso, String senha) {
+        String res = facade.cadastrarEstudante(nome, cpf, curso, senha);
+        
+        if (res.equals("100")) {
+            return new ModelAndView("redirect:/estudante/login");
+        } else{
+            ModelAndView mv = new ModelAndView("redirect:/estudante/cadastro");
+            mv.addObject("error", "exist");
+            return mv;
+        }
+    }
 }

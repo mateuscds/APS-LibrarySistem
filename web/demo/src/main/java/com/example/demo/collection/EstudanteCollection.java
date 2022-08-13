@@ -19,4 +19,12 @@ public class EstudanteCollection {
     public void cadastrarEstudante(Estudante estudante) {
         estudanteRepository.save(estudante);
     }
+
+    public boolean existeEstudante(String cpf) {
+        Estudante busca = estudanteRepository.findByCpf(cpf);
+        if (busca == null) 
+            return false;
+        else 
+            return true;
+    }
 }

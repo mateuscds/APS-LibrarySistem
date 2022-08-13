@@ -6,6 +6,7 @@ import org.springframework.stereotype.Repository;
 import com.example.demo.model.Estudante;
 
 @Repository
-public interface EstudanteRepository extends JpaRepository<Estudante, String> {
+public interface EstudanteRepository extends JpaRepository<Estudante, Long> {
     public Estudante findByCpfAndSenha(String cpf, String senha);
+    public Estudante findByCpf(String cpf);
 }
