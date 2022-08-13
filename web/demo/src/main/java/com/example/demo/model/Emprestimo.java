@@ -23,13 +23,19 @@ public class Emprestimo {
 
     private long idEstudante;
     private long idLivro;
+    private String nomeLivro;
+    private String edicaoLivro;
+    private boolean statusAberto;
     private LocalDate dataEmprestimo;
     private LocalDate dataTerminoEmprestimo;
 
-    public Emprestimo(long idEstudante, long idLivro, LocalDate dataEmprestimo, LocalDate dataTerminoEmprestimo) {
+    public Emprestimo(long idEstudante, long idLivro, String nomeLivro, String edicaoLivro, LocalDate dataEmprestimo, LocalDate dataTerminoEmprestimo) {
         this.idEstudante=idEstudante;
         this.idLivro=idLivro;
+        this.nomeLivro = nomeLivro;
+        this.edicaoLivro = edicaoLivro;
         this.dataEmprestimo=dataEmprestimo;
         this.dataTerminoEmprestimo=dataTerminoEmprestimo;
+        this.statusAberto=true;
     }
 }

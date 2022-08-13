@@ -11,4 +11,5 @@ import com.example.demo.model.Emprestimo;
 public interface EmprestimoRepository extends JpaRepository<Emprestimo, Long> {
     public List<Emprestimo> findAllByIdLivro(long idLivro);
     public List<Emprestimo> findAllByIdEstudante(long idEstudante);
+    public List<Emprestimo> findAllByIdEstudanteAndIdLivro(long idEstudante, long idLivro);
 }

@@ -14,8 +14,8 @@ public class EmprestimoService {
     @Autowired
     private EmprestimoCollection emprestimoCollection;
 
-    public void adicionarEmprestimo(Long idLivro, Long idEstudante, LocalDate dataInicio) {
-        emprestimoCollection.adicionarEmprestimo(idLivro, idEstudante, dataInicio);
+    public void adicionarEmprestimo(Long idEstudante, Long idLivro, String nomeLivro, String edicaoLivro, LocalDate dataInicio) {
+        emprestimoCollection.adicionarEmprestimo(idEstudante, idLivro, nomeLivro, edicaoLivro, dataInicio);
     }
 
     public List<Emprestimo> buscarPorEstudante(Long idEstudante) {
