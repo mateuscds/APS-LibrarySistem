@@ -22,7 +22,7 @@ public class FuncionarioService {
         return "100"; // sucesso
     }
 
-    public Funcionario logiFuncionario(String cpf, String senha) {
+    public Funcionario loginFuncionario(String cpf, String senha) {
         // alterar retorno diagrama
         return funcionarioCollection.loginFuncionario(cpf, senha);
     }

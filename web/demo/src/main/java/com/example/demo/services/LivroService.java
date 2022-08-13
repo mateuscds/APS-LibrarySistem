@@ -13,19 +13,22 @@ public class LivroService {
     @Autowired
     private LivroCollection livroCollection;
 
-    public void cadastroLivro(String nome, String edicao, int quantidade) {
-        livroCollection.adicionarLivro(new Livro(nome, edicao, quantidade));
+    public String cadastroLivro(String nome, String edicao, int quantidade) {
+        return livroCollection.adicionarLivro(new Livro(nome, edicao, quantidade));
     }
 
     public void atualizarLivro(Livro livro) {
         livroCollection.atualizarEstoque(livro);
     }
 
-    public boolean reservarLivroById(Long id) {
+    public Livro reservarLivroById(Long id) {
         return livroCollection.reservarLivroById(id);
     }
 
     public List<Livro> buscarTodosLivros() {
         return livroCollection.buscarTodosLivros();
+    }
+    public void devolverLivroById(Long id) {
+        livroCollection.devolverLivroById(id);
     }
 }
