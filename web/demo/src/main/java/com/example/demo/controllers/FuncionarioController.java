@@ -19,12 +19,12 @@ public class FuncionarioController {
     public ModelAndView home(HttpSession session) {
         // cria estaticamente um funcionario e deixa logado
         facade.cadastraFuncionario("joao", "12345678910", "123");
-        Funcionario f = facade.loginFuncionario("joao", "12345678910");
+        Funcionario f = facade.loginFuncionario("12345678910", "123");
         
         session.setAttribute("nome", f.getNome());
         session.setAttribute("cpf", f.getCpf());
         session.setAttribute("id", f.getId());
-        session.setAttribute("tipo", "estudante");
+        session.setAttribute("tipo", "funcionario");
         
         return new ModelAndView("redirect:/livros");
     }

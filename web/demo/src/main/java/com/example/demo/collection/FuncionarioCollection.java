@@ -21,6 +21,7 @@ public class FuncionarioCollection {
 
     public boolean existeFuncionario(String cpf) {
         Funcionario busca = funcionarioRepository.findByCpf(cpf);
+        System.out.println(busca);
         if (busca==null) return false;
         return true;
     }

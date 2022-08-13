@@ -1,9 +1,11 @@
 package com.example.demo;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.util.Pair;
 import org.springframework.stereotype.Component;
 
 import com.example.demo.model.Emprestimo;
@@ -40,18 +42,18 @@ public class Facade {
         return estudanteService.loginEstudante(cpf, senha);
     }
 
-    public void cadastrarLivro(String nome, String edicao, int quantidade) {
-        livroService.cadastroLivro(nome, edicao, quantidade);
+    public String cadastrarLivro(String nome, String edicao, int quantidade) {
+        return livroService.cadastroLivro(nome, edicao, quantidade);
     }
 
     public void atualizarLivro(Livro livro) {
         livroService.atualizarLivro(livro);
     }
     
-    public boolean reservarLivro(Long idLivro, Long idEstudante) {
-        boolean res = livroService.reservarLivroById(idLivro);
-        if (res) {
-            emprestimoService.adicionarEmprestimo(idLivro, idEstudante, LocalDate.now());
+    public boolean reservarLivro(Long idEstudante, Long idLivro) {
+        Livro res = livroService.reservarLivroById(idLivro);
+        if (res != null) {
+            emprestimoService.adicionarEmprestimo(idEstudante, idLivro, res.getNome(), res.getEdicao(), LocalDate.now());
             return true;
         } 
         return false;
@@ -61,11 +63,11 @@ public class Facade {
         return livroService.buscarTodosLivros();
     }
 
-    public void adicionarEmprestimo(Long idLivro, Long idEstudante, LocalDate dataInicio){
-        emprestimoService.adicionarEmprestimo(idLivro, idEstudante, dataInicio);
+    public void adicionarEmprestimo( Long idEstudante, Long idLivro, String nomeLivro, String edicaoLivro, LocalDate dataInicio){
+        emprestimoService.adicionarEmprestimo(idEstudante, idLivro, nomeLivro, edicaoLivro, dataInicio);
     }
 
-    public List<Emprestimo> buscarPorEstudante(Long idEstudante) {
+    public List<Emprestimo> buscarEmprestimoPorEstudante(Long idEstudante) {
         return emprestimoService.buscarPorEstudante(idEstudante);
     }
 
@@ -75,6 +77,16 @@ public class Facade {
     }
 
     public Funcionario loginFuncionario(String cpf, String senha) {
-        return funcionarioService.logiFuncionario(cpf, senha);
+        return funcionarioService.loginFuncionario(cpf, senha);
     }
+
+    public void devolverLivro(Long idEstudante, Long idLivro) {
+        livroService.devolverLivroById(idLivro);
+
+    }
+
+    public void atualizaStatusEmprestimo(Long idEstudante, Long idLivro) {
+        
+    }
+
 }
