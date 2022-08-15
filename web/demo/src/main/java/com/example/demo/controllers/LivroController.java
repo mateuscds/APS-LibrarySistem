@@ -39,16 +39,7 @@ public class LivroController {
         }
         mv.addObject("livros", livros);
         return mv;
-    }
-
-    @GetMapping("/livros/{livroId}/pegaremprestado")
-    public ModelAndView pegarEmprestado(@PathVariable Long livroId, HttpSession session) {
-        Object estudanteId = session.getAttribute("id"); 
-
-        facade.reservarLivro(Long.parseLong(String.valueOf(estudanteId)), livroId);
-        ModelAndView mv = new ModelAndView("redirect:/livros"); 
-        return mv;
-    }
+    }   
 
     @GetMapping("/livros/cadastrarlivro")
     public ModelAndView showCadastroLivro(HttpSession session) {
@@ -65,40 +56,6 @@ public class LivroController {
             ModelAndView mv = new ModelAndView("redirect:/livros/cadastrarlivro");
             mv.addObject("error", "exist");
             return mv;
-        }
-    }
-
-    @GetMapping("/livros/devolverlivro")
-    public ModelAndView showDevolverLivro(HttpSession session) {
-        return new ModelAndView("/livro/devolverLivro");
-    }
-
-    @GetMapping("/livros/emprestimos")
-    public ModelAndView showEmprestimos(Long cpf, HttpSession session) {
-
-        List<Emprestimo> emps = facade.buscarEmprestimoPorEstudante(cpf);
-        ModelAndView mv = new ModelAndView("livro/showEmprestimos");
-        mv.addObject("emprestimos", emps);
-        return mv;
-    }
-
-
-    @GetMapping("/livros/devolver/{idEmprestimo}")
-    public ModelAndView devolucao(@PathVariable Long idEmprestimo, HttpSession session) {
-
-        Emprestimo emp = facade.buscaEmprestimoPorId(idEmprestimo);
-        LocalDate today = LocalDate.now();
-        LocalDate limit = emp.getDataTerminoEmprestimo();
-
-        if (today.isAfter(limit)) {
-            ModelAndView mv = new ModelAndView("redirect:/livros/pagamento/{idEmprestimo}");
-            return mv;
-        } else {
-            facade.atualizaStatusEmprestimo(emp.getId());
-            Long idLivro = emp.getIdLivro();
-            facade.devolverLivro(idLivro);
-
-            return new ModelAndView("/livros/devolucaoSucesso");
         }
     }
 
