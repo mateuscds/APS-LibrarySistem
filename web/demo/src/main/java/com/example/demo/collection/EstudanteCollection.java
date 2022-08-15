@@ -27,4 +27,13 @@ public class EstudanteCollection {
         else 
             return true;
     }
+
+    public Estudante buscaEstudante(String cpf) {
+        return estudanteRepository.findByCpf(cpf);
+    }
+
+    public Estudante buscaEstudantePorId(Long id) {
+        return estudanteRepository.getReferenceById(id);
+    }
+
 }

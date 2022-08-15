@@ -1,5 +1,6 @@
 package com.example.demo.controllers;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -7,7 +8,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
+// import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -57,6 +58,14 @@ public class EstudanteController {
 
     @GetMapping("/estudante/login")
     public ModelAndView register() {
+        facade.cadastrarLivro("livro_teste", "1ed", 5);
+        facade.cadastrarEstudante("eu", "1", "1", "1");
+        Estudante e = facade.buscaEstudante("1");
+        
+        facade.adicionarEmprestimo(Long.valueOf(1), Long.valueOf(1), "livro_teste", "1ed", LocalDate.of(2022, 8, 1));
+        Emprestimo emp = facade.buscaEmprestimoPorId(Long.valueOf(1));
+        System.out.println(emp.getEdicaoLivro());
+
         return new ModelAndView("estudante/estudante");
     }
 
@@ -78,13 +87,11 @@ public class EstudanteController {
         }
     }
 
-    @GetMapping("/estudante/{livroId}/devolverlivro")
-    public ModelAndView devolverLivro(@PathVariable Long livroId, HttpSession session) {
-        Object estudanteId = session.getAttribute("id"); 
-
-        facade.devolverLivro(Long.parseLong(String.valueOf(estudanteId)), livroId);
-        ModelAndView mv = new ModelAndView("redirect:/livros"); 
-        return mv;
-    }
+    // @GetMapping("/estudante/{livroId}/devolverlivro")
+    // public ModelAndView devolverLivro(@PathVariable Long livroId, HttpSession session) {
+    //     facade.devolverLivro(livroId);
+    //     ModelAndView mv = new ModelAndView("redirect:/livros"); 
+    //     return mv;
+    // }
 
 }
