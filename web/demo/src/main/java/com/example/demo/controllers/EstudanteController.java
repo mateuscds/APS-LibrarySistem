@@ -58,14 +58,6 @@ public class EstudanteController {
 
     @GetMapping("/estudante/login")
     public ModelAndView register() {
-        facade.cadastrarLivro("livro_teste", "1ed", 5);
-        facade.cadastrarEstudante("eu", "1", "1", "1");
-        Estudante e = facade.buscaEstudante("1");
-        
-        facade.adicionarEmprestimo(Long.valueOf(1), Long.valueOf(1), "livro_teste", "1ed", LocalDate.of(2022, 8, 1));
-        Emprestimo emp = facade.buscaEmprestimoPorId(Long.valueOf(1));
-        System.out.println(emp.getEdicaoLivro());
-
         return new ModelAndView("estudante/estudante");
     }
 
@@ -87,11 +79,18 @@ public class EstudanteController {
         }
     }
 
-    // @GetMapping("/estudante/{livroId}/devolverlivro")
-    // public ModelAndView devolverLivro(@PathVariable Long livroId, HttpSession session) {
-    //     facade.devolverLivro(livroId);
-    //     ModelAndView mv = new ModelAndView("redirect:/livros"); 
-    //     return mv;
-    // }
+
+    @GetMapping("/carregateste")
+    public ModelAndView teste() {
+        facade.cadastrarLivro("Cálculo 1", "1ed", 5);
+        facade.cadastrarEstudante("Ricardo", "10987654321", "Engenharia Mecânica", "90");
+        
+        facade.adicionarEmprestimo(Long.valueOf(1), Long.valueOf(1), "livro_teste", "1ed", LocalDate.of(2022, 8, 1));
+        
+        facade.cadastrarLivro("livro1", "1ed", 30);
+        facade.cadastrarLivro("livro2", "3ed", 3);
+
+        return new ModelAndView("redirect:/estudante/login");
+    }
 
 }
