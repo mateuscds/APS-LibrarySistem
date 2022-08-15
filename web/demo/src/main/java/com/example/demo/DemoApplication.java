@@ -24,7 +24,7 @@ public class DemoApplication {
 	public String hello(@RequestParam(value = "name", defaultValue = "World") String name) {
 		
 		// System.out.println("--------->" + coll.hashCode());
-		coll.consultarEstudante("1234", "9999");
+		coll.loginEstudante("1234", "9999");
 		return String.format("Hello %s!", name);
 	}
 }

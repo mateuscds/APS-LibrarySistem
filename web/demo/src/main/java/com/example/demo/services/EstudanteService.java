@@ -31,4 +31,11 @@ public class EstudanteService {
         return estudanteCollection.loginEstudante(cpf, senha);
     }
 
+    public Estudante buscaEstudante(String cpf) {
+        return estudanteCollection.buscaEstudante(cpf);
+    }
+
+    public Estudante buscaEstudantePorId(Long id) {
+        return estudanteCollection.buscaEstudantePorId(id);
+    }
 }

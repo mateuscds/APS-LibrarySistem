@@ -20,11 +20,11 @@ public class EmprestimoCollection {
         emprestimoRepository.save(emp);
     }
 
-    public List<Emprestimo> buscarPorEstudante(long idEstudante) {
+    public List<Emprestimo> buscarPorEstudante(Long idEstudante) {
         return emprestimoRepository.findAllByIdEstudante(idEstudante);
     }
 
-    public void atualizaStatusEmprestimo(long idEstudante, long idLivro) {
+    public void atualizaStatusEmprestimo(Long idEstudante, Long idLivro) {
         List<Emprestimo> emps = emprestimoRepository.findAllByIdEstudanteAndIdLivro(idEstudante, idLivro);
 
         // Emprestimo emp_maiorTempo;
@@ -35,5 +35,16 @@ public class EmprestimoCollection {
                 break;
             }
         }
+    }
+
+    public Emprestimo buscaPorId(Long id) {
+        return emprestimoRepository.getReferenceById(id);
+    }
+
+    public void atualizaStatus(Long id) {
+        Emprestimo emp = emprestimoRepository.getReferenceById(id);
+
+        emp.setStatusAberto(false);
+        emprestimoRepository.save(emp);
     }
 }

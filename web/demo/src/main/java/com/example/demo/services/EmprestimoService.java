@@ -21,4 +21,12 @@ public class EmprestimoService {
     public List<Emprestimo> buscarPorEstudante(Long idEstudante) {
         return emprestimoCollection.buscarPorEstudante(idEstudante);
     }
+
+    public Emprestimo buscaPorId(Long id) {
+        return emprestimoCollection.buscaPorId(id);
+    }
+    
+    public void atualizaStatus(Long id) {
+        emprestimoCollection.atualizaStatus(id);
+    }
 }

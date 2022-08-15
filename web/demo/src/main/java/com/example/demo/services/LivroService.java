@@ -21,6 +21,10 @@ public class LivroService {
         livroCollection.atualizarEstoque(livro);
     }
 
+    public void atualizarQuantidade(Long id, int quantidade) {
+        livroCollection.atualizarQuantidade(id, quantidade);
+    }
+
     public Livro reservarLivroById(Long id) {
         return livroCollection.reservarLivroById(id);
     }
@@ -30,5 +34,9 @@ public class LivroService {
     }
     public void devolverLivroById(Long id) {
         livroCollection.devolverLivroById(id);
+    }
+
+    public void deletarLivro(Long id) {
+        livroCollection.deletarLivro(id);
     }
 }

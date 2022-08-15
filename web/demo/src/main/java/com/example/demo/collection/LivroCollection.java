@@ -48,7 +48,19 @@ public class LivroCollection {
     public void devolverLivroById(Long id) {
         Livro livro_bd = livroRepository.getReferenceById(id);
         livro_bd.setQuantidade(livro_bd.getQuantidade()+1);
-
         livroRepository.save(livro_bd);
+        return;
+    }
+
+    public void atualizarQuantidade(Long id, int quantidade) {
+        Livro livro_bd = livroRepository.getReferenceById(id);
+        livro_bd.setQuantidade(quantidade);
+        livroRepository.save(livro_bd);
+        return;
+    }
+
+    public void deletarLivro(Long id) {
+        livroRepository.deleteById(id);
+        return;
     }
 }
