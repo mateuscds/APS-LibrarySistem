@@ -1,0 +1,23 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>LibrarySystem - Edita Livro</title>
+  <p> Edita Livro </p>
+</head> 
+<body>
+  <div class="container">
+    <div class="row">
+      <form th:action="@{/livros/{livroId}/editaquantidade(livroId = ${livroindex})}" method="POST">
+        <div class="mb-3">
+          <label th:text="${livroindex}">Quantidade</label>
+          <label class="form-label">Quantidade</label>
+          <input class="form-control" type="number" name="quantidade">
+        </div>
+        <div class="mb-3">
+        <button class="btn btn-primary" type="submit">Atualizar</button>
+      </form>
+    </div>
+  </div>
+
+</body>
+</html> 
