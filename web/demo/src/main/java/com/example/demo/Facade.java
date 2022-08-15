@@ -1,11 +1,9 @@
 package com.example.demo;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.util.Pair;
 import org.springframework.stereotype.Component;
 
 import com.example.demo.model.Comprovante;
@@ -17,7 +15,6 @@ import com.example.demo.services.EmprestimoService;
 import com.example.demo.services.EstudanteService;
 import com.example.demo.services.FuncionarioService;
 import com.example.demo.services.LivroService;
-import com.example.demo.services.PagamentoAPIService;
 
 
 @Component
@@ -34,9 +31,6 @@ public class Facade {
 
     @Autowired
     private FuncionarioService funcionarioService;
-
-    @Autowired
-    private PagamentoAPIService pagamentoAPIService;
 
     public String cadastrarEstudante(String nome, String cpf, String curso, String senha) {
         String res = estudanteService.cadastrarEstudante(nome, cpf, curso, senha);
@@ -117,6 +111,6 @@ public class Facade {
     }
 
     public boolean emitePagamento(String email, Double valor) {
-        return pagamentoAPIService.pagar(email, valor);
+        return emprestimoService.pagar(email, valor);
     }
 }

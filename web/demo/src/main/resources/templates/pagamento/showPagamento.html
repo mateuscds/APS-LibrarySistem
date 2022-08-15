@@ -10,7 +10,7 @@
         <p style="color:red" th:text="Gerar + ' ' + Pagamento + ' ' + De + ' ' + ${valor} + ' ' + Reais"></p>  
     </div>
     <div class="row">
-      <form action="/livros/pagamento" method="POST">
+      <form th:action="@{/livros/pagamento/{idEmprestimo}(idEmprestimo = ${idemprestimo})}" method="POST">
         <div class="mb-3">
             <label class="form-label">E-mail</label>
             <input class="form-control" type="text" name="email">

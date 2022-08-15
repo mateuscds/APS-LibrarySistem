@@ -1,20 +1,17 @@
 package com.example.demo.controllers;
 
-import java.time.LocalDate;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.example.demo.Facade;
-import com.example.demo.model.Emprestimo;
 import com.example.demo.model.Livro;
 
 @Controller
@@ -26,9 +23,6 @@ public class LivroController {
     @GetMapping("/livros")
     public ModelAndView mostrarLivros(HttpSession session) {
         Object client = session.getAttribute("tipo");
-
-        facade.cadastrarLivro("livro1", "1ed", 30);
-        facade.cadastrarLivro("livro2", "3ed", 3);
 
         List<Livro> livros = facade.buscarTodosLivros();
         ModelAndView mv;
@@ -83,7 +77,7 @@ public class LivroController {
         return new ModelAndView("redirect:/livros/editalivro");
     }
 
-    @PostMapping("/livros/{livroId}/deletar")
+    @GetMapping("/livros/{livroId}/deletar")
     public ModelAndView editaQuantidadeLivro(@PathVariable Long livroId, HttpSession session) {
 
         facade.deletarLivro(livroId);
