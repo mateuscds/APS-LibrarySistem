@@ -13,6 +13,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.example.demo.Facade;
 import com.example.demo.model.Emprestimo;
+import com.example.demo.model.Estudante;
 
 @Controller
 public class EmprestimoController {
@@ -21,9 +22,11 @@ public class EmprestimoController {
 
 
     @GetMapping("/livros/emprestimos")
-    public ModelAndView showEmprestimos(Long cpf, HttpSession session) {
+    public ModelAndView showEmprestimos(String cpf, HttpSession session) {
 
-        List<Emprestimo> emps = facade.buscarEmprestimoPorEstudante(cpf);
+        Estudante est = facade.buscaEstudante(cpf);
+        List<Emprestimo> emps = facade.buscarEmprestimoPorEstudante(est.getId());
+        System.out.println(emps.size());
         ModelAndView mv = new ModelAndView("livro/showEmprestimos");
         mv.addObject("emprestimos", emps);
         return mv;
