@@ -1,6 +1,5 @@
 package com.example.demo.model;
 
-import java.sql.Date;
 import java.time.LocalDate;
 
 import javax.persistence.Entity;
