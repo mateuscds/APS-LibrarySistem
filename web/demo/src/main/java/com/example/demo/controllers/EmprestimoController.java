@@ -41,30 +41,4 @@ public class EmprestimoController {
         return mv;
     }
 
-    @GetMapping("/livros/devolverlivro")
-    public ModelAndView showDevolverLivro(HttpSession session) {
-        return new ModelAndView("/livro/devolverLivro");
-    }
-
-
-    @GetMapping("/livros/devolver/{idEmprestimo}")
-    public ModelAndView devolucao(@PathVariable Long idEmprestimo, HttpSession session) {
-
-        Emprestimo emp = facade.buscaEmprestimoPorId(idEmprestimo);
-        LocalDate today = LocalDate.now();
-        LocalDate limit = emp.getDataTerminoEmprestimo();
-
-        if (today.isAfter(limit)) {
-            ModelAndView mv = new ModelAndView("redirect:/livros/pagamento/{idEmprestimo}");
-            return mv;
-        } else {
-            facade.atualizaStatusEmprestimo(emp.getId());
-            Long idLivro = emp.getIdLivro();
-            facade.devolverLivro(idLivro);
-
-            return new ModelAndView("/livros/devolucaoSucesso");
-        }
-    }
-
-
 }
