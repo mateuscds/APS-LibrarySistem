@@ -24,6 +24,7 @@ public class EstudanteController {
 
     @GetMapping("/estudante")
     public ModelAndView home(HttpSession session) {
+        // TODO Modificar quando mudar para sessão
         String curso = (String) session.getAttribute("curso");
         Long idEstudante = (Long) session.getAttribute("id");
 
@@ -37,48 +38,6 @@ public class EstudanteController {
             return mv;
         }
     }
-
-    @PostMapping("/estudante/login")
-    public ModelAndView loginEstudante(String cpf, String senha, HttpSession session) {
-        Estudante estudante = facade.loginEstudante(cpf, senha);
-        System.out.println("Aentrei aqui");
-        if (estudante != null) {
-            session.setAttribute("nome", estudante.getNome());
-            session.setAttribute("cpf", estudante.getCpf());
-            session.setAttribute("curso", estudante.getCurso());
-            session.setAttribute("id", estudante.getId());
-            session.setAttribute("tipo", "estudante");
-            return new ModelAndView("redirect:/livros");
-        } else {
-            ModelAndView mv = new ModelAndView("redirect:/estudante/login");
-            mv.addObject("error", "login");
-            return mv;
-        }
-    }
-
-    @GetMapping("/estudante/login")
-    public ModelAndView register() {
-        return new ModelAndView("estudante/estudante");
-    }
-
-    @GetMapping("/estudante/cadastro")
-    public ModelAndView showCadastro() {
-        return new ModelAndView("estudante/cadastro");
-    }
-
-    @PostMapping("/estudante/cadastro")
-    public ModelAndView showCadastro(String nome, String cpf, String curso, String senha) {
-        String res = facade.cadastrarEstudante(nome, cpf, curso, senha);
-        
-        if (res.equals("100")) {
-            return new ModelAndView("redirect:/estudante/login");
-        } else{
-            ModelAndView mv = new ModelAndView("redirect:/estudante/cadastro");
-            mv.addObject("error", "exist");
-            return mv;
-        }
-    }
-
 
     @GetMapping("/carregateste")
     public ModelAndView teste() {
