@@ -15,15 +15,12 @@ public class EstudanteService {
         return true;
     }
 
-    public String cadastrarEstudante(String nome, String cpf, String curso, String senha) {
-
-        boolean existe =estudanteCollection.existeEstudante(cpf);
-
+    public boolean cadastrarEstudante(String nome, String cpf, String curso, String senha) {
+        boolean existe = estudanteCollection.existeEstudante(cpf);
         if (existe)
-            return "CPF Já Existente";
-         
+            return false;
         estudanteCollection.cadastrarEstudante(new Estudante(nome, cpf, curso, senha));
-        return "100"; // sucesso
+        return true; // sucesso
     }
 
     public Estudante loginEstudante(String cpf, String senha) {
