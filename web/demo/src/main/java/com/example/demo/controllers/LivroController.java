@@ -26,7 +26,6 @@ public class LivroController {
 
         List<Livro> livros = facade.buscarTodosLivros();
         ModelAndView mv;
-        // TODO Modificar quando mudar para sessão
         if (client.equals("funcionario")) {
             mv = new ModelAndView("livro/showFuncionario");
         } else {
