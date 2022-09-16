@@ -113,4 +113,16 @@ public class Facade {
     public boolean emitePagamento(String email, Double valor) {
         return emprestimoService.pagar(email, valor);
     }
+
+    public boolean verificarDataEmprestimo(Long idEmprestimo) {
+        return emprestimoService.verificarDataEmprestimo(idEmprestimo);
+    } 
+
+    public Long buscaLivroEmprestimoPorId(Long idEmprestimo) {
+        return emprestimoService.buscaLivroEmprestimoPorId(idEmprestimo);
+    }
+
+    public Double valorMultaEmprestimo(Long idEmprestimo) {
+        return emprestimoService.valorMultaEmprestimo(idEmprestimo);
+    }
 }

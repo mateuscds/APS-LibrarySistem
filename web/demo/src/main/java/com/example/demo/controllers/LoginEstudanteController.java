@@ -25,7 +25,6 @@ public class LoginEstudanteController {
     @PostMapping("/estudante/login")
     public ModelAndView loginEstudante(String cpf, String senha, HttpSession session) {
         Estudante estudante = facade.loginEstudante(cpf, senha);
-        // TODO criar sessão
         if (estudante != null) {
             session.setAttribute("nome", estudante.getNome());
             session.setAttribute("cpf", estudante.getCpf());
