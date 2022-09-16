@@ -28,9 +28,8 @@ public class CadastroEstudanteController {
 
     @PostMapping("/estudante/cadastro")
     public ModelAndView showCadastro(String nome, String cpf, String curso, String senha) {
-        String res = facade.cadastrarEstudante(nome, cpf, curso, senha);
-        
-        if (res.equals("100")) {
+        Boolean res = facade.cadastrarEstudante(nome, cpf, curso, senha);
+        if (res) {
             return new ModelAndView("redirect:/estudante/login");
         } else{
             ModelAndView mv = new ModelAndView("redirect:/estudante/cadastro");

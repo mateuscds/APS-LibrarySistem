@@ -32,9 +32,8 @@ public class Facade {
     @Autowired
     private FuncionarioService funcionarioService;
 
-    public String cadastrarEstudante(String nome, String cpf, String curso, String senha) {
-        String res = estudanteService.cadastrarEstudante(nome, cpf, curso, senha);
-        return res;
+    public Boolean cadastrarEstudante(String nome, String cpf, String curso, String senha) {
+        return estudanteService.cadastrarEstudante(nome, cpf, curso, senha);
     }
 
     public Estudante loginEstudante(String cpf, String senha) {
