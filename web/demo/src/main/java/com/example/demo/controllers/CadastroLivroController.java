@@ -26,9 +26,9 @@ public class CadastroLivroController {
 
     @PostMapping("/livros/cadastrarlivro")
     public ModelAndView cadastroLivro(String nome, String edicao, int quantidade, HttpSession session) {
-        String res = facade.cadastrarLivro(nome, edicao, quantidade);
+        Boolean res = facade.cadastrarLivro(nome, edicao, quantidade);
 
-        if (res.equals("100")) {
+        if (res == true) {
             return new ModelAndView("redirect:/funcionario");
         } else {
             ModelAndView mv = new ModelAndView("redirect:/livros/cadastrarlivro");

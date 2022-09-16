@@ -13,7 +13,7 @@ public class LivroService {
     @Autowired
     private LivroCollection livroCollection;
 
-    public String cadastroLivro(String nome, String edicao, int quantidade) {
+    public Boolean cadastroLivro(String nome, String edicao, int quantidade) {
         return livroCollection.adicionarLivro(new Livro(nome, edicao, quantidade));
     }
 

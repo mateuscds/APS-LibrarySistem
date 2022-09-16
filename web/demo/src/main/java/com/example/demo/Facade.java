@@ -48,7 +48,7 @@ public class Facade {
         return estudanteService.buscaEstudantePorId(id);
     }
 
-    public String cadastrarLivro(String nome, String edicao, int quantidade) {
+    public Boolean cadastrarLivro(String nome, String edicao, int quantidade) {
         return livroService.cadastroLivro(nome, edicao, quantidade);
     }
 

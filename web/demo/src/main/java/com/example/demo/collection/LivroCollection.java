@@ -13,13 +13,13 @@ public class LivroCollection {
     @Autowired
     LivroRepository livroRepository;
 
-    public String adicionarLivro(Livro livro) {
+    public Boolean adicionarLivro(Livro livro) {
         Livro livros = livroRepository.findByNomeAndEdicao(livro.getNome(), livro.getEdicao());
         if (livros == null) {
             livroRepository.save(livro);
-            return "100";
+            return true;
         }
-        return "livro já cadastrado";
+        return false;
     }
 
     public void atualizarEstoque(Livro livro) {
