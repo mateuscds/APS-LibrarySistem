@@ -47,4 +47,12 @@ public class EmprestimoCollection {
         emp.setStatusAberto(false);
         emprestimoRepository.save(emp);
     }
+
+    public LocalDate dataTerminoEmprestimo(Long id) {
+        return emprestimoRepository.getReferenceById(id).getDataTerminoEmprestimo();
+    }
+    public Long buscaLivroEmprestimoPorId(Long id) {
+        return emprestimoRepository.getReferenceById(id).getIdLivro();
+    }
+
 }

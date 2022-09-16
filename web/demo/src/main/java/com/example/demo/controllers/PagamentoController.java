@@ -23,9 +23,7 @@ public class PagamentoController {
 
     @GetMapping("/livros/pagamento/{idEmprestimo}")
     public ModelAndView pagamento(@PathVariable Long idEmprestimo, HttpSession session) {
-        Emprestimo emp = facade.buscaEmprestimoPorId(idEmprestimo);
-        
-        Double valor = ChronoUnit.DAYS.between(LocalDate.now(), emp.getDataTerminoEmprestimo()) * 2.;
+        Double valor = facade.valorMultaEmprestimo(idEmprestimo);
         ModelAndView mv = new ModelAndView("/pagamento/showPagamento");
         mv.addObject("valor", Math.abs(valor));
         mv.addObject("idemprestimo", idEmprestimo);
