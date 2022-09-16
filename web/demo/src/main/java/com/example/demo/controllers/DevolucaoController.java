@@ -12,9 +12,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.example.demo.Facade;
-import com.example.demo.model.Emprestimo;
-import com.example.demo.model.Estudante;
 
+@Controller
 public class DevolucaoController {
     @Autowired
     private Facade facade;
@@ -28,16 +27,14 @@ public class DevolucaoController {
     @GetMapping("/livros/devolver/{idEmprestimo}")
     public ModelAndView devolucao(@PathVariable Long idEmprestimo, HttpSession session) {
 
-        Emprestimo emp = facade.buscaEmprestimoPorId(idEmprestimo);
-        LocalDate today = LocalDate.now();
-        LocalDate limit = emp.getDataTerminoEmprestimo();
+        boolean onTime = facade.verificarDataEmprestimo(idEmprestimo);
 
-        if (today.isAfter(limit)) {
+        if (!onTime) {
             ModelAndView mv = new ModelAndView("redirect:/livros/pagamento/{idEmprestimo}");
             return mv;
         } else {
-            facade.atualizaStatusEmprestimo(emp.getId());
-            Long idLivro = emp.getIdLivro();
+            facade.atualizaStatusEmprestimo(idEmprestimo);
+            Long idLivro = facade.buscaLivroEmprestimoPorId(idEmprestimo);
             facade.devolverLivro(idLivro);
 
             return new ModelAndView("/livros/devolucaoSucesso");
