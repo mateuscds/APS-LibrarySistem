@@ -1,6 +1,7 @@
 package com.example.demo.services;
 
 import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,6 +35,26 @@ public class EmprestimoService {
     
     public void atualizaStatus(Long id) {
         emprestimoCollection.atualizaStatus(id);
+    }
+
+    public boolean verificarDataEmprestimo(Long id) {
+      LocalDate limit = emprestimoCollection.dataTerminoEmprestimo(id);
+      LocalDate today = LocalDate.now();
+
+      if (today.isAfter(limit))
+        return false;
+      return true;
+    }
+
+    public Long buscaLivroEmprestimoPorId(Long id) {
+      return emprestimoCollection.buscaLivroEmprestimoPorId(id);
+    }
+
+    public Double valorMultaEmprestimo(Long id) {
+      Emprestimo emp = emprestimoCollection.buscaPorId(id);
+      if (!this.verificarDataEmprestimo(id))
+        return ChronoUnit.DAYS.between(LocalDate.now(), emp.getDataTerminoEmprestimo()) * 2.;
+      return 0.;
     }
 
     private String paymentAPIUrl = "http://localhost:3333/pagamento/librarysystem";
