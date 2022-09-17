@@ -37,7 +37,7 @@ public class DevolucaoController {
             Long idLivro = facade.buscaLivroEmprestimoPorId(idEmprestimo);
             facade.devolverLivro(idLivro);
 
-            return new ModelAndView("/livros/devolucaoSucesso");
+            return new ModelAndView("/livro/devolucaoSucesso");
         }
     }
 

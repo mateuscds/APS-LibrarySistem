@@ -8,6 +8,7 @@ import org.springframework.stereotype.Component;
 
 import com.example.demo.model.Comprovante;
 import com.example.demo.model.Emprestimo;
+import com.example.demo.model.Estoque;
 import com.example.demo.model.Estudante;
 import com.example.demo.model.Funcionario;
 import com.example.demo.model.Livro;
@@ -52,8 +53,8 @@ public class Facade {
         return livroService.cadastroLivro(nome, edicao, quantidade);
     }
 
-    public void atualizarLivro(Livro livro) {
-        livroService.atualizarLivro(livro);
+    public void atualizarEstoque(Estoque estoque) {
+        livroService.atualizarEstoque(estoque);
     }
     
     public void atualizarQuantidadeLivro(Long id, int quantidade) {
@@ -64,12 +65,12 @@ public class Facade {
         livroService.deletarLivro(id);
     }
 
-    public Comprovante reservarLivro(Long idEstudante, Long idLivro) {
-        Livro res = livroService.reservarLivroById(idLivro);
-        if (res != null) {
-            emprestimoService.adicionarEmprestimo(idEstudante, idLivro, res.getNome(), res.getEdicao(), LocalDate.now());
-            Estudante est = estudanteService.buscaEstudantePorId(idEstudante);
-            return new Comprovante(est, res, LocalDate.now());
+    public Comprovante reservarLivro(Long idEstudante, Long idEstoque) {
+        Estoque est = livroService.reservarLivroById(idEstoque);
+        if (est != null) {
+            emprestimoService.adicionarEmprestimo(idEstudante, idEstoque, est.getNome(), est.getEdicao(), LocalDate.now());
+            Estudante estudante = estudanteService.buscaEstudantePorId(idEstudante);
+            return new Comprovante(estudante, est, LocalDate.now());
         } 
 
         return null;
@@ -109,8 +110,8 @@ public class Facade {
         return emprestimoService.buscaPorId(id);
     }
 
-    public boolean emitePagamento(String email, Double valor) {
-        return emprestimoService.pagar(email, valor);
+    public boolean emitirBoleto(String cpf, String email, Double valor) {
+        return emprestimoService.emitirBoleto(cpf, email, valor);
     }
 
     public boolean verificarDataEmprestimo(Long idEmprestimo) {
@@ -123,5 +124,9 @@ public class Facade {
 
     public Double valorMultaEmprestimo(Long idEmprestimo) {
         return emprestimoService.valorMultaEmprestimo(idEmprestimo);
+    }
+
+    public List<Estoque> buscarTodosEstoques() {
+        return livroService.buscarTodosEstoques();
     }
 }

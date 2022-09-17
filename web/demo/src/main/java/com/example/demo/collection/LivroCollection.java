@@ -22,41 +22,8 @@ public class LivroCollection {
         return false;
     }
 
-    public void atualizarEstoque(Livro livro) {
-        Livro livro_bd = livroRepository.getReferenceById(livro.getId());
-        livro_bd.setQuantidade(livro.getQuantidade());
-
-        livroRepository.save(livro_bd);
-    }
-
     public List<Livro> buscarTodosLivros() {
         return livroRepository.findAll();
-    }
-
-    public Livro reservarLivroById(Long id) {
-        Livro livro_bd = livroRepository.getReferenceById(id);
-        if (livro_bd.getQuantidade() > 0) {
-            livro_bd.setQuantidade(livro_bd.getQuantidade()-1);
-
-            livroRepository.save(livro_bd);
-            return livro_bd;
-        }
-        
-        return null;
-    }
-
-    public void devolverLivroById(Long id) {
-        Livro livro_bd = livroRepository.getReferenceById(id);
-        livro_bd.setQuantidade(livro_bd.getQuantidade()+1);
-        livroRepository.save(livro_bd);
-        return;
-    }
-
-    public void atualizarQuantidade(Long id, int quantidade) {
-        Livro livro_bd = livroRepository.getReferenceById(id);
-        livro_bd.setQuantidade(quantidade);
-        livroRepository.save(livro_bd);
-        return;
     }
 
     public void deletarLivro(Long id) {
