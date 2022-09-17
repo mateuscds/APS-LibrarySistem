@@ -13,16 +13,19 @@ import lombok.NoArgsConstructor;
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
-public class Livro {
+public class Estoque {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    private Long idLivro;
     private String nome;
     private String edicao;
-
-    public Livro(String nome, String edicao) {
+    private int quantidade;
+    public Estoque(Long idLivro, String nome, String edicao, int quantidade) {
+        this.idLivro = idLivro;
         this.nome = nome;
         this.edicao = edicao;
+        this.quantidade = quantidade;
     }
 }

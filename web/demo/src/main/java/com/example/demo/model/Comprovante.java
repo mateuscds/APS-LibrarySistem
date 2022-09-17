@@ -12,6 +12,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class Comprovante {
     private Estudante estudante;
-    private Livro livro;
+    private Estoque estoque;
     LocalDate data;
 }

@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.example.demo.Facade;
+import com.example.demo.model.Estoque;
 import com.example.demo.model.Livro;
 
 @Controller
@@ -24,7 +25,7 @@ public class LivroController {
     public ModelAndView mostrarLivros(HttpSession session) {
         Object client = session.getAttribute("tipo");
 
-        List<Livro> livros = facade.buscarTodosLivros();
+        List<Estoque> livros = facade.buscarTodosEstoques();
         ModelAndView mv;
         if (client.equals("funcionario")) {
             mv = new ModelAndView("livro/showFuncionario");
