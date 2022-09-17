@@ -25,14 +25,15 @@ public class PagamentoController {
     public ModelAndView pagamento(@PathVariable Long idEmprestimo, HttpSession session) {
         Double valor = facade.valorMultaEmprestimo(idEmprestimo);
         ModelAndView mv = new ModelAndView("/pagamento/showPagamento");
-        mv.addObject("valor", Math.abs(valor));
+        mv.addObject("valor", valor);
         mv.addObject("idemprestimo", idEmprestimo);
         return mv;
     }
 
     @PostMapping("/livros/pagamento/{idEmprestimo}")
     public ModelAndView emitePagamento(@PathVariable Long idEmprestimo, String email, Double valor, HttpSession session) {
-        boolean res = facade.emitePagamento(email, valor);
+        Emprestimo emp = facade.buscaEmprestimoPorId(idEmprestimo);
+        boolean res = facade.emitirBoleto(facade.buscaEstudantePorId(emp.getIdEstudante()).getCpf(), email, valor);
 
         if (res == true) {
             facade.atualizaStatusEmprestimo(idEmprestimo);

@@ -11,8 +11,11 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 import com.example.demo.collection.EmprestimoCollection;
+import com.example.demo.dto.Pagamento;
+import com.example.demo.dto.PagamentoBoleto;
 import com.example.demo.dto.pagamentoApiResponse;
 import com.example.demo.model.Emprestimo;
+import com.example.demo.services.adapter.PagamentoAPIAdapter;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -20,6 +23,9 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 public class EmprestimoService {
     @Autowired
     private EmprestimoCollection emprestimoCollection;
+
+    @Autowired
+    private PagamentoAPIAdapter pagamentoAPIAdapter;
 
     public void adicionarEmprestimo(Long idEstudante, Long idLivro, String nomeLivro, String edicaoLivro, LocalDate dataInicio) {
         emprestimoCollection.adicionarEmprestimo(idEstudante, idLivro, nomeLivro, edicaoLivro, dataInicio);
@@ -53,33 +59,12 @@ public class EmprestimoService {
     public Double valorMultaEmprestimo(Long id) {
       Emprestimo emp = emprestimoCollection.buscaPorId(id);
       if (!this.verificarDataEmprestimo(id))
-        return ChronoUnit.DAYS.between(LocalDate.now(), emp.getDataTerminoEmprestimo()) * 2.;
+        return Math.abs(ChronoUnit.DAYS.between(LocalDate.now(), emp.getDataTerminoEmprestimo())) * 2.;
       return 0.;
     }
 
-    private String paymentAPIUrl = "http://localhost:3333/pagamento/librarysystem";
-
-    public Boolean pagar(String email, Double valor) {
-      RestTemplate restTemplate = new RestTemplate();
-      ObjectMapper mapper = new ObjectMapper();
-      String body = "";
-      try {
-        body = mapper.writeValueAsString(valor);
-        System.out.println(body);
-      } catch (JsonProcessingException e) {
-        e.printStackTrace();
-      }
-  
-      // // HttpHeaders headers = new HttpHeaders();
-      // // headers.setContentType(MediaType.APPLICATION_JSON);
-      // // headers.setAccept(Arrays.asList(MediaType.APPLICATION_JSON));
-      // System.out.println(headers);
-  
-      HttpEntity<String> entity = new HttpEntity<>(body);
-  
-      System.out.println(entity);
-  
-      pagamentoApiResponse response = restTemplate.exchange(paymentAPIUrl, HttpMethod.POST, entity, pagamentoApiResponse.class).getBody();
-      return response.getStatus().equals("success");
+    public Boolean emitirBoleto(String cpf, String email, Double valor) {
+      Pagamento pagamento = new PagamentoBoleto(cpf, String.valueOf(valor), LocalDate.now().plusDays(3).toString(), "123456789");
+      return pagamentoAPIAdapter.pagar(pagamento);
     }
 }
