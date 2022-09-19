@@ -1,44 +1,100 @@
 <!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>
+            LibrarySystem - Livros
+        </title>
+        <h1> 
+            LibrarySystem 
+        </h1>
+        <h2> 
+            Registro de Livros
+        </h2>
+    </head> 
 
-<body>
-    <main>
-        <div class="row">
-              <h3>Registro de Livros</h3>
-              <div class="col-12">
-                  <table class="table table-hover">
-                      <thead>
-                      <tr>
-                          <th scope="col">ID</th>
-                          <th scope="col">Nome</th>
-                          <th scope="col">Edição</th>
-                          <th scope="col">Data de Empréstimo</th>
-                          <th scope="col">Data Limite de Devolução</th>
-                          <th scope="col">Status</th>
-                      </tr>
-                      </thead>
-                      <tbody>
-                      <tr th:each="emprestimo : ${emprestimos}">
-                          <th class="col-1" scope="row" th:text="${emprestimo.id}"></th>
-                          <td class="col-1" th:text="${emprestimo.nomeLivro}"></td>
-                          <td class="col-3" th:text="${emprestimo.edicaoLivro}"></td>
-                          <td class="col-1" th:text="${emprestimo.dataEmprestimo}"></td>
-                          <td class="col-1" th:text="${emprestimo.dataTerminoEmprestimo}"></td>
-                          <td class="col-2">
-                            <span th:if="${emprestimo.statusAberto == true}">Aberto</span>
-                            <span th:unless="${emprestimo.statusAberto == true}">Concluído</span>
-                          </td>
-                          <!-- <td class="col-1"><button><a th:href="@{/livros/{livroId}/pegaremprestado(livroId = ${livro.id})}">Devolver</a></button></td> -->
-                      </tr>
-                      </tbody>
-                  </table>
-              </div>
-          </div>
 
-            
-        </div>
-    </main>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+    <body>
+        <main>
+            <div class="row">
+                <div class="col-12" style="overflow-x:auto;">
+                    <table>
+                        <tr>
+                            <th scope="col">ID</th>
+                            <th scope="col">Nome</th>
+                            <th scope="col">Edição</th>
+                            <th scope="col">Data de Empréstimo</th>
+                            <th scope="col">Data Limite de Devolução</th>
+                            <th scope="col">Status</th>
+                        </tr>
+                        <tr th:each="emprestimo : ${emprestimos}">
+                            <th scope="row" th:text="${emprestimo.id}"></th>
+                            <td th:text="${emprestimo.nomeLivro}"></td>
+                            <td th:text="${emprestimo.edicaoLivro}"></td>
+                            <td th:text="${emprestimo.dataEmprestimo}"></td>
+                            <td th:text="${emprestimo.dataTerminoEmprestimo}"></td>
+                            <td>
+                                <span th:if="${emprestimo.statusAberto == true}">Aberto</span>
+                                <span th:unless="${emprestimo.statusAberto == true}">Concluído</span>
+                            </td>
+                            <!-- <td class="col-1"><button><a th:href="@{/livros/{livroId}/pegaremprestado(livroId = ${livro.id})}">Devolver</a></button></td> -->
+                        </tr>
+                    </table>
+                </div>
+            </div>    
+            </div>
+        </main>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 
-</body>
+        <style>
+            * {
+              font-family: Arial;
+            }
+            .error {
+              text-align: center;
+            }
+            h1{
+              text-align: left;
+              font-size: 40px;
+              margin-left: 20px;
+            }
+            .row{
+              text-align: center;
+            }
+            .item{
+              padding-bottom: 8px;
+            }
+            h2{
+              text-align: center;
+            }
+            label{
+              display: inline-block;
+              text-align: center;
+            }
+            table, td, th {
+              margin-left: auto;
+              margin-right: auto;
+            }
+            td, th {
+              border: 1px solid black;
+              padding: 8px;
+            }
+            table {
+              border: 1px solid black;
+              border-radius: 4px;
+            }
+            .form-control{
+              margin-left: 5px;
+            }
+            .button {
+              margin-top: 10px;
+              display: block;
+            }
+            button {
+              background-color: #81D3F8;
+              border-radius: 4px;
+              border-style: inset;
+            }
+        </style>
+
+    </body>
 </html>
