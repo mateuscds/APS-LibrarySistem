@@ -1,0 +1,28 @@
+
+version: "3"
+services:
+    acesso:
+        build:
+            context: ./acesso/demo/
+        depends_on:
+            - discovery
+    # room:
+    #     build:
+    #         context: ./room/
+    #     depends_on:
+    #          - discovery
+    # admin:
+    #     build:
+    #         context: ./admin/
+    #     depends_on:
+    #          - discovery
+    discovery:
+        build:
+            context: ./discovery/
+        ports:
+            - "8761:8761"
+    gateway:
+        build:
+            context: ./gateway
+        ports:
+             - "8084:8084"
