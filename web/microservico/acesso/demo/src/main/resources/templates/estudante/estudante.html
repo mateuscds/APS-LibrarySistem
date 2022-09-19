@@ -1,0 +1,29 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>LibrarySystem - Login</title>
+  <p> Login Estudante </p>
+</head> 
+<body>
+  <div class="container">
+    <div class="mb-3">
+      <p style="color:red" th:text="Usuário + ' ' + Não + ' ' + Encontrado" th:unless="${param.error} == null"></p>  
+    </div>
+    <div class="row">
+      <form action="/estudante/login" method="POST">
+        <div class="mb-3">
+          <label class="form-label">CPF</label>
+          <input class="form-control" type="number" name="cpf">
+        </div>
+        <div class="mb-3">
+          <label class="form-label">Senha</label>
+          <input type="password" class="form-control" name="senha" placeholder="Digite sua Senha">
+        </div>
+        
+        <button class="btn btn-primary" type="submit">Login</button>
+      </form>
+    </div>
+  </div>
+
+</body>
+</html> 
