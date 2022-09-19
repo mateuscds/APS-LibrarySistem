@@ -13,6 +13,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.example.demo.Facade;
 import com.example.demo.model.Livro;
+import com.example.demo.model.Estoque;
 
 @Controller
 public class EditaQuantidadeLivroController {
@@ -24,6 +25,20 @@ public class EditaQuantidadeLivroController {
     public ModelAndView showEditaQuantidadeLivro(@PathVariable Long livroId, HttpSession session) {
         ModelAndView mv = new ModelAndView("/livro/editaQuantidadeLivro");
         mv.addObject("livroindex", livroId);
+
+        List<Livro> livros = facade.buscarTodosLivros();
+
+        for (Livro livro : livros) {
+            if (livro.getId() == livroId) {
+                mv.addObject("livronome", livro.getNome());
+            }
+        }
+
+        for (Estoque estoque : facade.buscarTodosEstoques()) {
+            if (estoque.getIdLivro() == livroId) {
+                mv.addObject("livroquantidade", estoque.getQuantidade());
+            }
+        }
 
         return mv;
     }
