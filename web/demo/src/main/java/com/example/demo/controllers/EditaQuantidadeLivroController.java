@@ -45,8 +45,7 @@ public class EditaQuantidadeLivroController {
 
     @PostMapping("/livros/{livroId}/editaquantidade")
     public ModelAndView editaQuantidadeLivro(@PathVariable Long livroId, int quantidade, HttpSession session) {
-        System.out.println(livroId);
-        System.out.println(quantidade);
+
         
         facade.atualizarQuantidadeLivro(livroId, quantidade);
         return new ModelAndView("redirect:/livros/editalivro");

@@ -27,12 +27,12 @@
               <th scope="col"></th>
             </tr>
             <tr th:each="livro : ${livros}">
-              <th scope="row" th:text="${livro.id}"></th>
+              <th scope="row" th:text="${livro.idLivro}"></th>
               <td th:text="${livro.nome}"></td>
               <td th:text="${livro.edicao}"></td>
               <td th:text="${livro.quantidade}"></td>
-              <td><button><a th:href="@{/livros/{livroId}/editaquantidade(livroId = ${livro.livroId})}">Editar Quantidade</a></button></td>
-              <td><button><a th:href="@{/livros/{livroId}/deletar(livroId = ${livro.livroId})}">Deletar</a></button></td>
+              <td><button><a th:href="@{/livros/{livroId}/editaquantidade(livroId = ${livro.idLivro})}">Editar Quantidade</a></button></td>
+              <td><button><a th:href="@{/livros/{livroId}/deletar(livroId = ${livro.idLivro})}">Deletar</a></button></td>
             </tr>
           </table>
         </div>

@@ -28,6 +28,10 @@ public class EstoqueCollection {
         return;
     }
 
+    public void deletarEstoque(Long id) {
+        estoqueRepository.deleteById(id);
+    }
+
     public void devolverLivroById(Long idEstoque) {
         Estoque est = estoqueRepository.getReferenceById(idEstoque);
         est.setQuantidade(est.getQuantidade()+1);
