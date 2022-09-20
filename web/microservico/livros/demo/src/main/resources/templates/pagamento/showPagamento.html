@@ -1,0 +1,26 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>LibrarySystem - Pagamento Multa</title>
+  <p> Pagamento Multa </p>
+</head> 
+<body>
+  <div class="container">
+    <div class="mb-3">
+        <p style="color:red" th:text="Gerar + ' ' + Pagamento + ' ' + De + ' ' + ${valor} + ' ' + Reais"></p>  
+    </div>
+    <div class="row">
+      <form th:action="@{/livros/pagamento/{idEmprestimo}(idEmprestimo = ${idemprestimo})}" method="POST">
+        <div class="mb-3">
+            <label class="form-label">E-mail</label>
+            <input class="form-control" type="text" name="email">
+            <input type="hidden" name="valor" th:value="${valor}">
+          </div>
+        <div class="mb-3">
+        <button class="btn btn-primary" type="submit">Emitir Boleto de Pagamento</button>
+      </form>
+    </div>
+  </div>
+
+</body>
+</html> 
