@@ -50,6 +50,10 @@ public class LivroService {
         livroCollection.deletarLivro(id);
     }
 
+    public void deletarEstoque(Long id) {
+        estoqueCollection.deletarEstoque(id);
+    }
+
     public List<Estoque> buscarTodosEstoques() {
         return estoqueCollection.buscarTodosEstoques();
     }

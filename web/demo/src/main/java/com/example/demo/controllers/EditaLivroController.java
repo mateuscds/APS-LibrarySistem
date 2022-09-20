@@ -2,6 +2,7 @@ package com.example.demo.controllers;
 
 import org.springframework.stereotype.Controller;
 import java.util.List;
+import java.util.ArrayList;
 
 import javax.servlet.http.HttpSession;
 
@@ -13,7 +14,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.example.demo.Facade;
+import com.example.demo.model.Estoque;
 import com.example.demo.model.Livro;
+
 
 @Controller
 public class EditaLivroController {
@@ -24,7 +27,17 @@ public class EditaLivroController {
     @GetMapping("/livros/editalivro")
     public ModelAndView editaLivro(HttpSession session) {
         ModelAndView mv = new ModelAndView("/livro/editaLivro");
-        mv.addObject("livros", facade.buscarTodosLivros());
+        List<Livro> livros = facade.buscarTodosLivros();
+        List<Estoque> estoques = facade.buscarTodosEstoques();
+
+        
+        System.out.println(session);
+        System.out.println(session.getAttribute("tipo"));
+        System.out.println(session.getAttribute("nome"));
+        System.out.println(session.getAttribute("cpf"));
+        System.out.println(session.getAttribute("id"));
+
+        mv.addObject("livros", estoques);
         return mv;
     }
 }

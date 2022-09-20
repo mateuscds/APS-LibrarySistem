@@ -1,37 +1,92 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-  <title>LibrarySystem - Cadastro</title>
-  <p> Cadastro Estudante </p>
+  <title>
+    LibrarySystem - Cadastro
+  </title>
+  <h1> 
+    LibrarySystem 
+  </h1>
+  <h2> 
+    Cadastro Estudante 
+  </h2>
 </head> 
 <body>
   <div class="container">
-    <div class="mb-3">
+    <div class="error">
         <p style="color:red" th:text="CPF + ' ' + Já + ' ' + Cadastrado" th:unless="${param.error} == null"></p>  
     </div>
     <div class="row">
       <form action="/estudante/cadastro" method="POST">
-        <div class="mb-3">
-            <label class="form-label">Nome</label>
-            <input class="form-control" type="text" name="nome">
-          </div>
-          <div class="mb-3">
-            <label class="form-label">CPF</label>
-            <input class="form-control" type="number" name="cpf">
-          </div>    
-        <div class="mb-3">
-          <label class="form-label">Curso</label>
-          <input class="form-control" type="text" name="curso">
-        </div>
-        <div class="mb-3">
-          <label class="form-label">Senha</label>
-          <input type="password" class="form-control" name="senha" placeholder="Crie sua Senha">
-        </div>
+        <table>
+          <tr class="item">
+              <td><label class="form-label">Nome</label></td>
+              <td><input class="form-control" type="text" name="nome" placeholder="Digite seu Nome" /></td>
+          </tr>
+          <tr class="item">
+              <td><label class="form-label">CPF</label></td>
+              <td><input class="form-control" type="number" name="cpf" placeholder="Digite seu CPF" /></td>
+          </tr>
+          <tr class="item">
+              <td><label class="form-label">Curso</label></td>
+              <td><input class="form-control" type="text" name="curso" placeholder="Digite seu Curso" /></td>
+          </tr>
+          <tr class="item">
+              <td><label class="form-label">Senha</label></td>
+              <td><input class="form-control" type="password" name="senha" placeholder="Digite sua Senha" /></td>
+          </tr>
+        </table>
         
-        <button class="btn btn-primary" type="submit">Cadastrar</button>
+        <div class="button">
+          <button type="submit" class="btn btn-primary">Cadastrar</button>
+        </div>
       </form>
     </div>
   </div>
+
+
+  <style>
+    * {
+      font-family: Arial;
+    }
+    .error {
+      text-align: center;
+    }
+    h1{
+      text-align: left;
+      font-size: 40px;
+      margin-left: 20px;
+    }
+    .row{
+      text-align: center;
+    }
+    .item{
+      padding-bottom: 8px;
+    }
+    h2{
+      text-align: center;
+    }
+    label{
+      display: inline-block;
+      text-align: center;
+    }
+    table {
+      display: inline-block;
+      text-align: center;
+    }
+    .form-control{
+      margin-left: 5px;
+    }
+    .button {
+      margin-top: 10px;
+      display: block;
+    }
+    button {
+      background-color: #81D3F8;
+      border-radius: 4px;
+      border-style: inset;
+    }
+  </style>
 
 </body>
 </html> 

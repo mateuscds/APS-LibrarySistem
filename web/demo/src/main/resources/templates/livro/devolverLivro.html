@@ -1,23 +1,77 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
-<head>
-  <title>LibrarySystem - Devolução Livro</title>
-  <p> Buscar Empréstimos </p>
-</head> 
-<body>
-  <div class="container">
-    <div class="row">
-      <form action="/livros/emprestimos" method="GET">
-        <div class="mb-3">
-            <label class="form-label">cpf</label>
-            <input class="form-control" type="text" name="cpf">
-        </div>
-        <div class="mb-3">
-            <button class="btn btn-primary" type="submit">Buscar Emprestimos do Estudante</button>
-        </div>
-      </form>
-    </div>
-  </div>
+  <head>
+    <title>
+      LibrarySystem - Devolução Livr
+    </title>
+    <h1> 
+      LibrarySystem 
+    </h1>
+    <h2> 
+      Buscar Empréstimos
+    </h2>
+  </head>
 
-</body>
+  <body>
+    <div class="container">
+      <div class="row">
+        <form action="/livros/emprestimos" method="GET">
+          <div class="mb-3">
+            <table>
+              <td><label class="form-label">CPF</label></td>
+              <td><input class="form-control" type="text" name="cpf" placeholder="Digite o CPF"></td>
+            </table>
+              
+          </div>
+          <div class="mb-3">
+              <button class="btn btn-primary" type="submit">Buscar Emprestimos do Estudante</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </body>
+
+  <style>
+    * {
+      font-family: Arial;
+    }
+    .error {
+      text-align: center;
+    }
+    h1{
+      text-align: left;
+      font-size: 40px;
+      margin-left: 20px;
+    }
+    .row{
+      text-align: center;
+    }
+    .item{
+      padding-bottom: 8px;
+    }
+    h2{
+      text-align: center;
+    }
+    label{
+      display: inline-block;
+      text-align: center;
+    }
+    table {
+      display: inline-block;
+      text-align: center;
+    }
+    .form-control{
+      margin-left: 5px;
+    }
+    .button {
+      margin-top: 12px;
+      display: block;
+    }
+    button {
+      background-color: #81D3F8;
+      border-radius: 4px;
+      border-style: inset;
+    }
+  </style>
+
 </html> 

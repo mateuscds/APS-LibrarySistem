@@ -39,7 +39,17 @@ public class LivroController {
     @GetMapping("/livros/{livroId}/deletar")
     public ModelAndView deletarLivro(@PathVariable Long livroId, HttpSession session) {
 
+        List<Livro> livros = facade.buscarTodosLivros();
+        List<Estoque> estoques = facade.buscarTodosEstoques();
+
+        for (int i = 0; i < estoques.size(); i++) {
+            if (estoques.get(i).getIdLivro() == livroId) {
+                facade.deletarEstoque(estoques.get(i).getId());
+            }
+        }
+
         facade.deletarLivro(livroId);
+
         return new ModelAndView("redirect:/livros/editalivro");
     }
 }

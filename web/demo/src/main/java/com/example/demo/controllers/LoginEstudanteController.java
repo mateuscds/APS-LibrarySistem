@@ -43,4 +43,11 @@ public class LoginEstudanteController {
     public ModelAndView register() {
         return new ModelAndView("estudante/estudante");
     }
+
+    @GetMapping("/")
+    public ModelAndView home() {
+        return new ModelAndView("estudante/estudante");
+    }
+
+    
 }

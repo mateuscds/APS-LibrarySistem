@@ -65,6 +65,10 @@ public class Facade {
         livroService.deletarLivro(id);
     }
 
+    public void deletarEstoque(Long id) {
+        livroService.deletarEstoque(id);
+    }
+
     public Comprovante reservarLivro(Long idEstudante, Long idEstoque) {
         Estoque est = livroService.reservarLivroById(idEstoque);
         if (est != null) {

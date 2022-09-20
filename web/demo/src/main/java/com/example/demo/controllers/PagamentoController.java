@@ -14,6 +14,7 @@ import org.springframework.web.servlet.ModelAndView;
 import java.time.temporal.ChronoUnit;
 
 import com.example.demo.Facade;
+import com.example.demo.model.Estudante;
 import com.example.demo.model.Emprestimo;
 
 @Controller
@@ -36,8 +37,16 @@ public class PagamentoController {
         boolean res = facade.emitirBoleto(facade.buscaEstudantePorId(emp.getIdEstudante()).getCpf(), email, valor);
 
         if (res == true) {
+
+            Emprestimo emprestimo = facade.buscaEmprestimoPorId(idEmprestimo);
+            Estudante est = facade.buscaEstudantePorId(emprestimo.getIdEstudante());
+
             facade.atualizaStatusEmprestimo(idEmprestimo);
-            return new ModelAndView("/pagamento/pagamentoSucesso");
+            ModelAndView mv = new ModelAndView("/pagamento/pagamentoSucesso");
+
+            mv.addObject("cpfEstudante", est.getCpf());
+
+            return mv;
         }
         else
             return new ModelAndView("/pagamento/pagamentoFalha");
