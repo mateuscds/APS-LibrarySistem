@@ -6,16 +6,16 @@ services:
             context: ./acesso/demo/
         depends_on:
             - discovery
-    # room:
-    #     build:
-    #         context: ./room/
-    #     depends_on:
-    #          - discovery
-    # admin:
-    #     build:
-    #         context: ./admin/
-    #     depends_on:
-    #          - discovery
+    livros:
+        build:
+            context: ./livros/demo/
+        depends_on:
+             - discovery
+    estoque:
+        build:
+            context: ./estoque/demo
+        depends_on:
+             - discovery
     discovery:
         build:
             context: ./discovery/

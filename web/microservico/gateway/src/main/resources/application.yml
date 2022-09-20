@@ -14,11 +14,11 @@ spring:
                   uri: lb://acesso
                   predicates:
                   - Path=/estudante/**, /funcionario/**
-                - id: room
-                  uri: lb://room
+                - id: livros
+                  uri: lb://livros
                   predicates:
-                    - Path=/room/**
-                - id: admin
-                  uri: lb://admin
+                    - Path=/livros/**
+                - id: estoque
+                  uri: lb://estoque
                   predicates:
-                    - Path=/admin/**
+                    - Path=/estoque/**
