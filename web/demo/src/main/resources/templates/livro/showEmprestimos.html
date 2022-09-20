@@ -37,11 +37,11 @@
                 <span th:if="${emprestimo.statusAberto == true}">Aberto</span>
                 <span th:unless="${emprestimo.statusAberto == true}">Concluído</span>
               </td>
-              <td class="col-1">
+              <!-- <td class="col-1">
                 <button th:if="${emprestimo.statusAberto == true}">
                     <a th:href="@{/livros/devolver/{idEmprestimo}(idEmprestimo = ${emprestimo.id})}">Devolver</a>
                 </button>
-              </td>
+              </td> -->
               <!-- <td class="col-1"><button><a th:href="@{/livros/{livroId}/pegaremprestado(livroId = ${livro.id})}">Devolver</a></button></td> -->
             </tr>
           </table>

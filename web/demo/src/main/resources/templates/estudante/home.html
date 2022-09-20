@@ -15,6 +15,12 @@
 
     <body>
         <main>
+          <div class="button_logout">
+            <button> <a th:href="@{/estudante/login}">Logout</a> </button>
+          </div>
+          <div class="button_estudante">
+            <button> <a th:href="@{/livros}">Fazer emprestimo</a> </button>
+          </div>
             <div class="row">
                 <div class="col-12" style="overflow-x:auto;">
                     <table>
@@ -35,6 +41,11 @@
                             <td>
                                 <span th:if="${emprestimo.statusAberto == true}">Aberto</span>
                                 <span th:unless="${emprestimo.statusAberto == true}">Concluído</span>
+                            </td>
+                            <td class="col-1">
+                              <button th:if="${emprestimo.statusAberto == true}">
+                                <a th:href="@{/livros/devolver/{idEmprestimo}(idEmprestimo = ${emprestimo.id})}">Devolver</a>
+                              </button>
                             </td>
                             <!-- <td class="col-1"><button><a th:href="@{/livros/{livroId}/pegaremprestado(livroId = ${livro.id})}">Devolver</a></button></td> -->
                         </tr>
@@ -88,6 +99,18 @@
             .button {
               margin-top: 10px;
               display: block;
+            }
+            .button_estudante {
+              margin-top: 10px;
+              display: block;
+              text-align: center;
+              margin-bottom: 10px;
+            }
+            .button_logout {
+              margin-top: 10px;
+              display: block;
+              text-align: right;
+              margin-bottom: 5px;
             }
             button {
               background-color: #81D3F8;
