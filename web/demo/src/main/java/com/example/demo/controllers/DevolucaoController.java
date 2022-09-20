@@ -46,7 +46,6 @@ public class DevolucaoController {
             facade.devolverLivro(idLivro);
 
             ModelAndView mv = new ModelAndView("/livro/devolucaoSucesso");
-            System.out.println("CPF: " + est.getCpf());
             mv.addObject("cpfEstudante", est.getCpf());
             return mv;
         }
