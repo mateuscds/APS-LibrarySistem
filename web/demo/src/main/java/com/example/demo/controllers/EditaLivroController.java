@@ -31,7 +31,11 @@ public class EditaLivroController {
         List<Estoque> estoques = facade.buscarTodosEstoques();
 
         
-
+        System.out.println(session);
+        System.out.println(session.getAttribute("tipo"));
+        System.out.println(session.getAttribute("nome"));
+        System.out.println(session.getAttribute("cpf"));
+        System.out.println(session.getAttribute("id"));
 
         mv.addObject("livros", estoques);
         return mv;

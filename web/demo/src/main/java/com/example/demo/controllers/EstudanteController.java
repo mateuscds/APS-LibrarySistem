@@ -49,6 +49,8 @@ public class EstudanteController {
         facade.cadastrarLivro("livro1", "1ed", 30);
         facade.cadastrarLivro("livro2", "3ed", 3);
 
+        facade.cadastrarEstudante("lucas", "123", "ec", "123");
+
         return new ModelAndView("redirect:/estudante/login");
     }
 
