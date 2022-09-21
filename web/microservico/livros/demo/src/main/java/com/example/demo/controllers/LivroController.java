@@ -56,7 +56,7 @@ public class LivroController {
     @GetMapping("/livros/{livroId}/deletar")
     public ModelAndView deletarLivro(@PathVariable Long livroId, HttpSession session) {
 
-        facade.deletarLivro(livroId);
+        facade.deletarEstoque(livroId);
         return new ModelAndView("redirect:/livros/editalivro");
     }
 }
