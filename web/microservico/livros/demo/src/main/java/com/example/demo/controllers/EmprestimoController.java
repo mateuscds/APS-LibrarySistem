@@ -39,6 +39,7 @@ public class EmprestimoController {
         List<Emprestimo> emps = facade.buscarEmprestimoPorEstudante(id);
         ModelAndView mv = new ModelAndView("estudante/home");
         mv.addObject("emprestimos", emps);
+        mv.addObject("id", id);
         return mv;
     }
 
@@ -47,7 +48,7 @@ public class EmprestimoController {
     public ModelAndView pegarEmprestado(@PathVariable Long livroId, @PathVariable Long estudanteId, HttpSession session) {
 
         facade.reservarLivro(estudanteId, livroId);
-        ModelAndView mv = new ModelAndView("redirect:/livros/funcionario"); 
+        ModelAndView mv = new ModelAndView("redirect:/livros/estudante/" + "?id=" + String.valueOf(estudanteId)); 
         return mv;
     }
 

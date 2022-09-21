@@ -19,7 +19,7 @@
         <button> <a th:href="@{/estudante/login}">Logout</a> </button>
       </div>
       <div class="button_estudante">
-        <button> <a th:href="@{/estudante}">Meus Emprestimos</a> </button>
+        <button> <a th:href="@{/estudante(id=${param.id})}">Meus Emprestimos</a> </button>
       </div>
       <div class="row">
         <div class="col-12" style="overflow-x:auto;">
@@ -36,7 +36,7 @@
               <td  th:text="${livro.nome}"></td>
               <td  th:text="${livro.edicao}"></td>
               <td  th:text="${livro.quantidade}"></td>
-              <td><button><a th:href="@{/livros/{livroId}/pegaremprestado(livroId = ${livro.id})}">Pegar Emprestado</a></button></td>
+              <td><button><a th:href="@{/livros/{livroId}/pegaremprestado/{estudanteId}(livroId = ${livro.id}, estudanteId=${param.id})}">Pegar Emprestado</a></button></td>
             </tr>
           </table>
         </div>

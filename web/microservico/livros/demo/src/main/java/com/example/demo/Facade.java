@@ -69,7 +69,7 @@ public class Facade {
     }
 
     public void adicionarEmprestimo( Long idEstudante, Long idLivro, String nomeLivro, String edicaoLivro, LocalDate dataInicio){
-        // emprestimoService.adicionarEmprestimo(idEstudante, idLivro, nomeLivro, edicaoLivro, dataInicio);
+        emprestimoService.adicionarEmprestimo(idEstudante, idLivro, nomeLivro, edicaoLivro, dataInicio);
     }
 
     public List<Emprestimo> buscarEmprestimoPorEstudante(Long idEstudante) {
@@ -86,7 +86,7 @@ public class Facade {
     }
     
     public Emprestimo buscaEmprestimoPorId(Long id) {
-        return new Emprestimo();//emprestimoService.buscaPorId(id);
+        return emprestimoService.buscaPorId(id);
     }
 
     public boolean emitirBoleto(String cpf, String email, Double valor) {
@@ -110,6 +110,10 @@ public class Facade {
     }
     public Long buscaEstudante(String cpf) {
         return estudanteAPIService.buscaEstudante(cpf);
+    }
+
+    public String buscaEstudanteId(Long id) {
+        return estudanteAPIService.buscaEstudantePorId(id);
     }
 
     public void deletarEstoque(Long id) {

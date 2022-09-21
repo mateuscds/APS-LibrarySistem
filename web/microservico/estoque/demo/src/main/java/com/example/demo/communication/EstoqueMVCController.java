@@ -67,6 +67,15 @@ public class EstoqueMVCController {
     // System.out.println(estoque);
     return estoqueController.deletarLivro(reserva);
   }
+
+
+  @PostMapping("/estoque/devolver")
+  @ResponseBody
+  public Boolean devolverEstoque(@RequestBody Long idEstoque) {
+    System.out.println(("->>>>>>>>>>>>>>>>>>>> DEVOLVENDO ESTOQUE <<<<<<<<<<<<<<<<<<<<<<<<"));
+    // System.out.println(estoque);
+    return estoqueController.devolverEstoque(idEstoque);
+  }
   
   // @GetMapping("/admin/")
   // public ModelAndView home() {

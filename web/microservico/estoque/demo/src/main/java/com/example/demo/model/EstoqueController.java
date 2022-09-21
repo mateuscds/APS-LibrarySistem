@@ -36,6 +36,12 @@ public class EstoqueController {
         estoqueCollection.atualizarQuantidade(id, quantidade);
         return true;
     }
+
+    public Boolean devolverEstoque(Long id) {
+        estoqueCollection.devolverLivroById(id);
+        return true;
+    }
+
     public Boolean deletarLivro(Long livroId) {
 
         estoqueCollection.deletarEstoque(livroId);
