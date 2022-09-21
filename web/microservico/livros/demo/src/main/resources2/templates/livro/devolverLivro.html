@@ -1,0 +1,23 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>LibrarySystem - Devolução Livro</title>
+  <p> Buscar Empréstimos </p>
+</head> 
+<body>
+  <div class="container">
+    <div class="row">
+      <form action="/livros/emprestimos" method="GET">
+        <div class="mb-3">
+            <label class="form-label">cpf</label>
+            <input class="form-control" type="text" name="cpf">
+        </div>
+        <div class="mb-3">
+            <button class="btn btn-primary" type="submit">Buscar Emprestimos do Estudante</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+</body>
+</html> 

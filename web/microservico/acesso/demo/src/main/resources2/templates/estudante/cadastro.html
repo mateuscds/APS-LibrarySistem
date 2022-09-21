@@ -1,0 +1,37 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>LibrarySystem - Cadastro</title>
+  <p> Cadastro Estudante </p>
+</head> 
+<body>
+  <div class="container">
+    <div class="mb-3">
+        <p style="color:red" th:text="CPF + ' ' + Já + ' ' + Cadastrado" th:unless="${param.error} == null"></p>  
+    </div>
+    <div class="row">
+      <form action="/estudante/cadastro" method="POST">
+        <div class="mb-3">
+            <label class="form-label">Nome</label>
+            <input class="form-control" type="text" name="nome">
+          </div>
+          <div class="mb-3">
+            <label class="form-label">CPF</label>
+            <input class="form-control" type="number" name="cpf">
+          </div>    
+        <div class="mb-3">
+          <label class="form-label">Curso</label>
+          <input class="form-control" type="text" name="curso">
+        </div>
+        <div class="mb-3">
+          <label class="form-label">Senha</label>
+          <input type="password" class="form-control" name="senha" placeholder="Crie sua Senha">
+        </div>
+        
+        <button class="btn btn-primary" type="submit">Cadastrar</button>
+      </form>
+    </div>
+  </div>
+
+</body>
+</html> 
