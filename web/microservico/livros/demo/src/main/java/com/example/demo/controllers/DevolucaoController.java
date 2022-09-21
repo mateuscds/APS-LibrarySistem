@@ -11,6 +11,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.example.demo.dto.Estudante;
+import com.example.demo.dto.Emprestimo;
+
+
 import com.example.demo.Facade;
 
 @Controller
@@ -32,12 +36,19 @@ public class DevolucaoController {
             ModelAndView mv = new ModelAndView("redirect:/livros/pagamento/{idEmprestimo}");
             return mv;
         } else {
+
+            Emprestimo emprestimo = facade.buscaEmprestimoPorId(idEmprestimo);
+
+            System.out.println(emprestimo);
+            String est = facade.buscaEstudanteId(emprestimo.getIdEstudante());
+
             facade.atualizaStatusEmprestimo(idEmprestimo);
             Long idLivro = facade.buscaLivroEmprestimoPorId(idEmprestimo);
             facade.devolverLivro(idLivro);
 
-            return new ModelAndView("livro/devolucaoSucesso");
+            ModelAndView mv = new ModelAndView("livro/devolucaoSucesso");
+            mv.addObject("cpfEstudante", est);
+            return mv;
         }
     }
-
 }

@@ -19,7 +19,7 @@
             <button> <a th:href="@{/estudante/login}">Logout</a> </button>
           </div>
           <div class="button_estudante">
-            <button> <a th:href="@{/livros}">Fazer emprestimo</a> </button>
+            <button> <a th:href="@{/livros/estudante/(id=${param.id})}">Fazer emprestimo</a> </button>
           </div>
             <div class="row">
                 <div class="col-12" style="overflow-x:auto;">

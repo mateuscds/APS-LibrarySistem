@@ -73,13 +73,13 @@ public class EstoqueAPIService {
     }
 
     public void devolverLivroById(Long idEstoque) {
-        Mono<List<Estoque>> response = client().get()
-        .uri("/rooms/{hotelId}", idEstoque)
+        Mono<Boolean> response = client().post()
+        .uri("/estoque/devolver")
+        .body(Mono.just(idEstoque), Long.class)
         .retrieve()
-        .bodyToMono(new ParameterizedTypeReference<List<Estoque>>() {});
+        .bodyToMono(Boolean.class); 
 
-        List<Estoque> rooms = response.block();
-          
+        Boolean res = response.block();        
         return;
     }
 

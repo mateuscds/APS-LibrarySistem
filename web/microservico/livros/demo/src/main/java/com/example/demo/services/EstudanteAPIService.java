@@ -47,7 +47,21 @@ public class EstudanteAPIService {
 
         return res;             
     }
-    
+
+    public String buscaEstudantePorId(Long id) {
+        Mono<String> response = client().post()
+            .uri("/estudante/buscacpf")
+            .body(Mono.just(id), Long.class)
+            .retrieve()
+            .bodyToMono(String.class); 
+        
+        System.out.println("->>>>>>>>>>>>>>>>>>>>>>>>>>>ENVIEI POST <<<<<<<<<<<<<<<<<<<<=-");
+        String res = response.block();
+        System.out.println(res);
+
+        return res;             
+    }
+
     // // TODO Integrar com o serviço Estoque
     // public List<Estoque> buscarTodosEstoques() {
 

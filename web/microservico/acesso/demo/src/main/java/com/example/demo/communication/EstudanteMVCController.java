@@ -31,6 +31,14 @@ public class EstudanteMVCController {
     return facade.buscaEstudante(cpf).getId();
   }
 
+  @PostMapping("/estudante/buscacpf")
+  @ResponseBody
+  public String buscaCpf(@RequestBody Long id) {
+
+    System.out.println("->>>>>>>>>>>>>>>>>>>> RET ESTUDANTE <<<<<<<<<<<<<<<<<<<<<<<<");
+    return facade.buscaEstudanteId(id).getCpf();
+  }
+
   // @PostMapping("/estoque/cadastro")
   // @ResponseBody
   // public Boolean cadastrarEstoque(@RequestBody Estoque estoque) {

@@ -47,5 +47,9 @@ public class Facade {
         return funcionarioService.loginFuncionario(cpf, senha);
     }
 
+    public Estudante buscaEstudanteId(Long id) {
+        return estudanteService.buscaEstudantePorId(id);
+    }
+
 
 }
