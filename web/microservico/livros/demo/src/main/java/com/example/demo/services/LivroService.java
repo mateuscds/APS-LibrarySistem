@@ -56,4 +56,8 @@ public class LivroService {
         List<Estoque> a = estoqueAPIService.buscarTodosEstoques();
         return a;
     }
+
+    public void deletarEstoque(Long id) {
+        estoqueAPIService.deletarLivroById(id);
+    }
 }

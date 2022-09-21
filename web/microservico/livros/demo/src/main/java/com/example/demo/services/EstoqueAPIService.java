@@ -84,7 +84,6 @@ public class EstoqueAPIService {
     }
 
     public void atualizarEstoque(Estoque estoque) {
-        System.out.println("->>>>>>>>>>>>>>>>>>>>>>>>>>> TO NO ERRADO <<<<<<<<<<<<<<<<<<<<=-");
         return;
     }
 
@@ -106,6 +105,21 @@ public class EstoqueAPIService {
 
         Mono<Boolean> response = client().post()
         .uri("/estoque/reservar")
+        .body(Mono.just(idEstoque), Long.class)
+        .retrieve()
+        .bodyToMono(Boolean.class); 
+    
+        System.out.println("->>>>>>>>>>>>>>>>>>>>>>>>>>>ENVIEI POST <<<<<<<<<<<<<<<<<<<<=-");
+        Boolean res = response.block();
+        System.out.println(res);
+
+        return res;
+    }
+
+    public Boolean deletarLivroById(Long idEstoque) {
+
+        Mono<Boolean> response = client().post()
+        .uri("/estoque/deletar")
         .body(Mono.just(idEstoque), Long.class)
         .retrieve()
         .bodyToMono(Boolean.class); 

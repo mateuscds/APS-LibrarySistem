@@ -55,4 +55,8 @@ public class EstoqueCollection {
         System.out.println(estoque);
         return true;
     }
+
+    public void deletarEstoque(Long id) {
+        estoqueRepository.deleteById(id);
+    }
 }

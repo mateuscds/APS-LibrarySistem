@@ -58,6 +58,15 @@ public class EstoqueMVCController {
     // System.out.println(estoque);
     return estoqueController.atualizaQuantidad(reserva.id, reserva.quantidade);
   }
+
+  @PostMapping("/estoque/deletar")
+  @ResponseBody
+  public Boolean deletarEstoque(@RequestBody Long reserva) {
+    System.out.println(("->>>>>>>>>>>>>>>>>>>> RESERVANDO ESTOQUE <<<<<<<<<<<<<<<<<<<<<<<<"));
+    System.out.println(("->>>>>>>>>>>>>>>>>>>> "+ reserva+" <<<<<<<<<<<<<<<<<<<<<<<<"));
+    // System.out.println(estoque);
+    return estoqueController.deletarLivro(reserva);
+  }
   
   // @GetMapping("/admin/")
   // public ModelAndView home() {

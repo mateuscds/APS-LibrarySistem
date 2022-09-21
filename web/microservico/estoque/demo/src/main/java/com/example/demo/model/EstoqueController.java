@@ -36,9 +36,9 @@ public class EstoqueController {
         estoqueCollection.atualizarQuantidade(id, quantidade);
         return true;
     }
-    // public ModelAndView deletarLivro(@PathVariable Long livroId, HttpSession session) {
+    public Boolean deletarLivro(Long livroId) {
 
-    //     facade.deletarLivro(livroId);
-    //     return new ModelAndView("redirect:/livros/editalivro");
-    // }
+        estoqueCollection.deletarEstoque(livroId);
+        return true;
+    }
 }

@@ -111,4 +111,8 @@ public class Facade {
     public Long buscaEstudante(String cpf) {
         return estudanteAPIService.buscaEstudante(cpf);
     }
+
+    public void deletarEstoque(Long id) {
+        livroService.deletarEstoque(id);
+    }
 }
