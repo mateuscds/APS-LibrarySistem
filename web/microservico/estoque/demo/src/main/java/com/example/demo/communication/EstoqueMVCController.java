@@ -15,6 +15,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
+import com.example.demo.model.ReservaApiRequest;
+
+import com.example.demo.model.EstoqueAPIRequest;
 
 @Controller
 public class EstoqueMVCController {
@@ -37,6 +40,25 @@ public class EstoqueMVCController {
     System.out.println((estoque));
     return estoqueController.cadastrarEstoque(estoque);
   }
+  
+  @PostMapping("/estoque/reservar")
+  @ResponseBody
+  public Boolean reservarEstoque(@RequestBody Long reserva) {
+    System.out.println(("->>>>>>>>>>>>>>>>>>>> RESERVANDO ESTOQUE <<<<<<<<<<<<<<<<<<<<<<<<"));
+    System.out.println(("->>>>>>>>>>>>>>>>>>>> "+ reserva+" <<<<<<<<<<<<<<<<<<<<<<<<"));
+    // System.out.println(estoque);
+    return estoqueController.reservarByid(reserva);
+  }
+
+  @PostMapping("/estoque/atualizar")
+  @ResponseBody
+  public Boolean atualizarQuantidadeEstoque(@RequestBody EstoqueAPIRequest reserva) {
+    System.out.println(("->>>>>>>>>>>>>>>>>>>> RESERVANDO ESTOQUE <<<<<<<<<<<<<<<<<<<<<<<<"));
+    System.out.println(("->>>>>>>>>>>>>>>>>>>> "+ reserva+" <<<<<<<<<<<<<<<<<<<<<<<<"));
+    // System.out.println(estoque);
+    return estoqueController.atualizaQuantidad(reserva.id, reserva.quantidade);
+  }
+  
   // @GetMapping("/admin/")
   // public ModelAndView home() {
   //   ModelAndView mv = new ModelAndView("new");

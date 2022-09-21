@@ -23,8 +23,8 @@ public class EditaLivroController {
 
     @GetMapping("/livros/editalivro")
     public ModelAndView editaLivro(HttpSession session) {
-        ModelAndView mv = new ModelAndView("/livro/editaLivro");
-        mv.addObject("livros", facade.buscarTodosLivros());
+        ModelAndView mv = new ModelAndView("livro/editaLivro");
+        mv.addObject("livros", facade.buscarTodosEstoques());
         return mv;
     }
 }

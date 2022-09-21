@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Comprovante {
-    private Estudante estudante;
+    private Long idEstudante;
     private Estoque estoque;
     LocalDate data;
 }

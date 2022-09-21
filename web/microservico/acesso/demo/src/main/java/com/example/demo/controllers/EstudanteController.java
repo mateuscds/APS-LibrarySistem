@@ -8,6 +8,8 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
 // import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
@@ -21,22 +23,23 @@ public class EstudanteController {
     @Autowired
     private Facade facade;
 
-    // @GetMapping("/estudante")
-    // public ModelAndView home(HttpSession session) {
-    //     // TODO Modificar quando mudar para sessão
-    //     String curso = (String) session.getAttribute("curso");
-    //     Long idEstudante = (Long) session.getAttribute("id");
+    @GetMapping("/estudante")
+    public ModelAndView home(@RequestParam Long id, HttpSession session) {
+        String curso = (String) session.getAttribute("curso");
+        Long idEstudante = (Long) session.getAttribute("id");
 
-    //     if(curso == null) {
-    //         return new ModelAndView("redirect:/estudante/login");
-    //     } else {
-    //         List<Emprestimo> emps = facade.buscarEmprestimoPorEstudante(idEstudante);
+        if(id == null) {
+            return new ModelAndView("redirect:/estudante/login");
+        } else {
+            // List<Emprestimo> emps = facade.buscarEmprestimoPorEstudante(idEstudante);
+            ModelAndView mv = new ModelAndView("redirect:/livros/estudante/emprestimos" + "?id=" + String.valueOf(id));
+            return mv;
+        }
+    }
 
-    //         ModelAndView mv = new ModelAndView("estudante/home");
-    //         mv.addObject("emprestimos", emps);
-    //         return mv;
-    //     }
-    // }
+    public Estudante buscaEstudante(String cpf) {
+        return facade.buscaEstudante(cpf);
+    }
 
     // @GetMapping("/carregateste")
     // public ModelAndView teste() {

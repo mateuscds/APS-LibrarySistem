@@ -18,10 +18,9 @@ public class DevolucaoController {
     @Autowired
     private Facade facade;
 
-    // TODO Alterar arquitetura adicionando DevolucaoController
     @GetMapping("/livros/devolverlivro")
     public ModelAndView showDevolverLivro(HttpSession session) {
-        return new ModelAndView("/livro/devolverLivro");
+        return new ModelAndView("livro/devolverLivro");
     }
 
     @GetMapping("/livros/devolver/{idEmprestimo}")
@@ -37,7 +36,7 @@ public class DevolucaoController {
             Long idLivro = facade.buscaLivroEmprestimoPorId(idEmprestimo);
             facade.devolverLivro(idLivro);
 
-            return new ModelAndView("/livro/devolucaoSucesso");
+            return new ModelAndView("livro/devolucaoSucesso");
         }
     }
 

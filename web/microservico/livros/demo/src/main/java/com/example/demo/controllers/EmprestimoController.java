@@ -10,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.demo.Facade;
 import com.example.demo.dto.Emprestimo;
@@ -24,20 +25,29 @@ public class EmprestimoController {
     @GetMapping("/livros/emprestimos")
     public ModelAndView showEmprestimos(String cpf, HttpSession session) {
 
-        Estudante est = facade.buscaEstudante(cpf);
-        List<Emprestimo> emps = facade.buscarEmprestimoPorEstudante(est.getId());
+        Long id = facade.buscaEstudante(cpf);
+        List<Emprestimo> emps = facade.buscarEmprestimoPorEstudante(id);
         System.out.println(emps.size());
         ModelAndView mv = new ModelAndView("livro/showEmprestimos");
         mv.addObject("emprestimos", emps);
         return mv;
     }
 
-    @GetMapping("/livros/{livroId}/pegaremprestado")
-    public ModelAndView pegarEmprestado(@PathVariable Long livroId, HttpSession session) {
-        Object estudanteId = session.getAttribute("id"); 
+    @GetMapping("/livros/estudante/emprestimos")
+    public ModelAndView showEmprestimosEstudante(@RequestParam Long id, String cpf, HttpSession session) {
 
-        facade.reservarLivro(Long.parseLong(String.valueOf(estudanteId)), livroId);
-        ModelAndView mv = new ModelAndView("redirect:/livros"); 
+        List<Emprestimo> emps = facade.buscarEmprestimoPorEstudante(id);
+        ModelAndView mv = new ModelAndView("estudante/home");
+        mv.addObject("emprestimos", emps);
+        return mv;
+    }
+
+
+    @GetMapping("/livros/{livroId}/pegaremprestado/{estudanteId}")
+    public ModelAndView pegarEmprestado(@PathVariable Long livroId, @PathVariable Long estudanteId, HttpSession session) {
+
+        facade.reservarLivro(estudanteId, livroId);
+        ModelAndView mv = new ModelAndView("redirect:/livros/funcionario"); 
         return mv;
     }
 

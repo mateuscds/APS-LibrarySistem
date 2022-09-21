@@ -35,15 +35,15 @@ public class EstoqueCollection {
         return;
     }
 
-    public Estoque reservarLivroById(Long id) {
+    public Boolean reservarLivroById(Long id) {
         Estoque est = estoqueRepository.getReferenceById(id);
         if (est.getQuantidade() > 0) {
             est.setQuantidade(est.getQuantidade()-1);
 
             estoqueRepository.save(est);
-            return est;
+            return true;
         }
-        return null;
+        return false;
     }
 
     public List<Estoque> buscarTodosEstoques() {

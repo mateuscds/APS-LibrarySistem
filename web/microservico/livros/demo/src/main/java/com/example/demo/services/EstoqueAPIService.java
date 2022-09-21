@@ -10,8 +10,9 @@ import java.util.stream.Collectors;
 import reactor.core.publisher.Mono;
 
 import com.example.demo.dto.Estoque;
+import com.example.demo.dto.ReservaApiRequest;
 import java.util.List;
-
+import com.example.demo.dto.EstoqueAPIRequest;
 
 @Component
 public class EstoqueAPIService {
@@ -83,15 +84,36 @@ public class EstoqueAPIService {
     }
 
     public void atualizarEstoque(Estoque estoque) {
+        System.out.println("->>>>>>>>>>>>>>>>>>>>>>>>>>> TO NO ERRADO <<<<<<<<<<<<<<<<<<<<=-");
         return;
     }
 
     public void atualizarQuantidade(Long idEstoque, int quantidade) {
-        return;
+        EstoqueAPIRequest estoqueAPIRequest = new EstoqueAPIRequest();
+        estoqueAPIRequest.id = idEstoque;
+        estoqueAPIRequest.quantidade = quantidade;
+        System.out.println("->>>>>>>>>>>>>>>>>>>>>>>>>>> ENVIANDO ATUALIZAR QUANTIDADE <<<<<<<<<<<<<<<<<<<<=-");
+        Mono<Boolean> response = client().post()
+        .uri("/estoque/atualizar")
+        .body(Mono.just(estoqueAPIRequest), EstoqueAPIRequest.class)
+        .retrieve()
+        .bodyToMono(Boolean.class); 
+
+        Boolean res = response.block();
     }
 
-    public Estoque reservarLivroById(Long idEstoque) {
-        // return estoqueCollection.reservarLivroById(idEstoque);
-        return new Estoque();
+    public Boolean reservarLivroById(Long idEstoque) {
+
+        Mono<Boolean> response = client().post()
+        .uri("/estoque/reservar")
+        .body(Mono.just(idEstoque), Long.class)
+        .retrieve()
+        .bodyToMono(Boolean.class); 
+    
+        System.out.println("->>>>>>>>>>>>>>>>>>>>>>>>>>>ENVIEI POST <<<<<<<<<<<<<<<<<<<<=-");
+        Boolean res = response.block();
+        System.out.println(res);
+
+        return res;
     }
 }

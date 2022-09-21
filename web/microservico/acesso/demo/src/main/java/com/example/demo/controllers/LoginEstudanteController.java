@@ -8,8 +8,10 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-// import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
 import org.springframework.web.servlet.ModelAndView;
 
 import com.example.demo.Facade;
@@ -30,13 +32,14 @@ public class LoginEstudanteController {
             session.setAttribute("curso", estudante.getCurso());
             session.setAttribute("id", estudante.getId());
             session.setAttribute("tipo", "estudante");
-            return new ModelAndView("redirect:/livros");
+
+            return new ModelAndView("redirect:/livros/estudante/" + "?id=" + String.valueOf(estudante.getId()));
         } else {
             ModelAndView mv = new ModelAndView("redirect:/estudante/login");
             mv.addObject("error", "login");
             return mv;
         }
-    }
+    }   
 
     @GetMapping("/estudante/login")
     public ModelAndView register() {

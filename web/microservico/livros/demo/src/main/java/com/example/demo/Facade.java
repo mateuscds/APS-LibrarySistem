@@ -14,6 +14,7 @@ import com.example.demo.dto.Estudante;
 import com.example.demo.dto.Funcionario;
 import com.example.demo.model.Livro;
 import com.example.demo.services.EmprestimoService;
+import com.example.demo.services.EstudanteAPIService;
 import com.example.demo.services.LivroService;
 
 @Component
@@ -25,6 +26,9 @@ public class Facade {
 
     @Autowired
     private EmprestimoService emprestimoService;
+
+    @Autowired
+    private EstudanteAPIService estudanteAPIService;
 
     public Boolean cadastrarLivro(String nome, String edicao, int quantidade) {
         return livroService.cadastroLivro(nome, edicao, quantidade);
@@ -43,12 +47,19 @@ public class Facade {
     }
 
     public Comprovante reservarLivro(Long idEstudante, Long idEstoque) {
-        // Estoque est = livroService.reservarLivroById(idEstoque);
-        // if (est != null) {
-        //     emprestimoService.adicionarEmprestimo(idEstudante, idEstoque, est.getNome(), est.getEdicao(), LocalDate.now());
-        //     Estudante estudante = estudanteService.buscaEstudantePorId(idEstudante);
-        //     return new Comprovante(estudante, est, LocalDate.now());
-        // } 
+        Boolean res = livroService.reservarLivroById(idEstoque);
+        if (res == true) {
+            List<Estoque> est = livroService.buscarTodosEstoques();
+            Estoque estoque = null;
+            for (Estoque e : est) {
+                if (e.getId() == idEstoque) {
+                    estoque = e;
+                    break;
+                }
+            }
+            emprestimoService.adicionarEmprestimo(idEstudante, idEstoque, estoque.getNome(), estoque.getEdicao(), LocalDate.now());
+            return new Comprovante(idEstudante, estoque, LocalDate.now());
+        } 
 
         return null;
     }
@@ -62,7 +73,7 @@ public class Facade {
     }
 
     public List<Emprestimo> buscarEmprestimoPorEstudante(Long idEstudante) {
-        return new ArrayList<Emprestimo>(); //emprestimoService.buscarPorEstudante(idEstudante);
+        return emprestimoService.buscarPorEstudante(idEstudante);
     }
 
     public void devolverLivro(Long idLivro) {
@@ -71,7 +82,7 @@ public class Facade {
     }
 
     public void atualizaStatusEmprestimo(Long id) {
-        // emprestimoService.atualizaStatus(id);
+        emprestimoService.atualizaStatus(id);
     }
     
     public Emprestimo buscaEmprestimoPorId(Long id) {
@@ -79,25 +90,25 @@ public class Facade {
     }
 
     public boolean emitirBoleto(String cpf, String email, Double valor) {
-        return false;//emprestimoService.emitirBoleto(cpf, email, valor);
+        return emprestimoService.emitirBoleto(cpf, email, valor);
     }
 
     public boolean verificarDataEmprestimo(Long idEmprestimo) {
-        return true;//return emprestimoService.verificarDataEmprestimo(idEmprestimo);
+        return emprestimoService.verificarDataEmprestimo(idEmprestimo);
     } 
 
     public Long buscaLivroEmprestimoPorId(Long idEmprestimo) {
-        return 1L;//emprestimoService.buscaLivroEmprestimoPorId(idEmprestimo);
+        return emprestimoService.buscaLivroEmprestimoPorId(idEmprestimo);
     }
 
     public Double valorMultaEmprestimo(Long idEmprestimo) {
-        return 0.;//emprestimoService.valorMultaEmprestimo(idEmprestimo);
+        return emprestimoService.valorMultaEmprestimo(idEmprestimo);
     }
 
     public List<Estoque> buscarTodosEstoques() {
         return livroService.buscarTodosEstoques();
     }
-    public Estudante buscaEstudante(String cpf) {
-        return new Estudante();
+    public Long buscaEstudante(String cpf) {
+        return estudanteAPIService.buscaEstudante(cpf);
     }
 }

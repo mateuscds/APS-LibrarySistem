@@ -21,7 +21,7 @@
                           <td class="col-1" th:text="${livro.nome}"></td>
                           <td class="col-3" th:text="${livro.edicao}"></td>
                           <td class="col-2" th:text="${livro.quantidade}"></td>
-                          <td class="col-1"><button><a th:href="@{/livros/{livroId}/pegaremprestado(livroId = ${livro.id})}">Pegar Emprestado</a></button></td>
+                          <td class="col-1"><button><a th:href="@{/livros/{livroId}/pegaremprestado/{estudanteId}(livroId = ${livro.id}, estudanteId = ${param.id})}">Pegar Emprestado</a></button></td>
                       </tr>
                       </tbody>
                   </table>
