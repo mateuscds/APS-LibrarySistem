@@ -1,26 +1,80 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
-<head>
-  <title>LibrarySystem - Pagamento Multa</title>
-  <p> Pagamento Multa </p>
-</head> 
-<body>
-  <div class="container">
-    <div class="mb-3">
-        <p style="color:red" th:text="Gerar + ' ' + Pagamento + ' ' + De + ' ' + ${valor} + ' ' + Reais"></p>  
-    </div>
-    <div class="row">
-      <form th:action="@{/livros/pagamento/{idEmprestimo}(idEmprestimo = ${idemprestimo})}" method="POST">
-        <div class="mb-3">
-            <label class="form-label">E-mail</label>
-            <input class="form-control" type="text" name="email">
-            <input type="hidden" name="valor" th:value="${valor}">
-          </div>
-        <div class="mb-3">
-        <button class="btn btn-primary" type="submit">Emitir Boleto de Pagamento</button>
-      </form>
-    </div>
-  </div>
 
-</body>
+  <head>
+    <title>
+      LibrarySystem - Pagamento Multa
+    </title>
+    <h1> 
+      LibrarySystem 
+    </h1>
+    <h2> 
+      Pagamento Multa
+    </h2>
+  </head> 
+  <body>
+    <div class="container">
+      <div class="error">
+          <p style="color:red" th:text="Gerar + ' ' + Pagamento + ' ' + De + ' ' + ${valor} + ' ' + Reais"></p>  
+      </div>
+      <div class="row">
+        <form th:action="@{/livros/pagamento/{idEmprestimo}(idEmprestimo = ${idemprestimo})}" method="POST">
+          <table>
+            <tr>
+              <td><label class="form-label">E-mail</label></td>
+              <td><input class="form-control" type="text" name="email"></td>
+              <td><input type="hidden" name="valor" th:value="${valor}"></td>
+            </tr>
+          </table>
+          <div class="button"> 
+            <button type="submit">Emitir Boleto de Pagamento</button>
+          </div> 
+        </form>
+      </div>
+    </div>
+
+    <style>
+      * {
+        font-family: Arial;
+      }
+      .error {
+        text-align: center;
+      }
+      h1{
+        text-align: left;
+        font-size: 40px;
+        margin-left: 20px;
+      }
+      .row{
+        text-align: center;
+      }
+      .item{
+        padding-bottom: 8px;
+      }
+      h2{
+        text-align: center;
+      }
+      label{
+        display: inline-block;
+        text-align: center;
+      }
+      table {
+        display: inline-block;
+        text-align: center;
+      }
+      .form-control{
+        margin-left: 5px;
+      }
+      .button {
+        margin-top: 10px;
+        display: block;
+      }
+      button {
+        background-color: #81D3F8;
+        border-radius: 4px;
+        border-style: inset;
+      }
+    </style>
+
+  </body>
 </html> 

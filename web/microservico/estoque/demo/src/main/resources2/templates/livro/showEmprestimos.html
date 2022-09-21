@@ -1,0 +1,49 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<body>
+    <main>
+        <div class="row">
+              <h3>Emprestimos do Aluno</h3>
+              <div class="col-12">
+                  <table class="table table-hover">
+                      <thead>
+                      <tr>
+                          <th scope="col">ID</th>
+                          <th scope="col">Nome</th>
+                          <th scope="col">Edição</th>
+                          <th scope="col">Data de Empréstimo</th>
+                          <th scope="col">Data Limite de Devolução</th>
+                          <th scope="col">Status</th>
+                      </tr>
+                      </thead>
+                      <tbody>
+                      <tr th:each="emprestimo : ${emprestimos}">
+                          <th class="col-1" scope="row" th:text="${emprestimo.id}"></th>
+                          <td class="col-1" th:text="${emprestimo.nomeLivro}"></td>
+                          <td class="col-3" th:text="${emprestimo.edicaoLivro}"></td>
+                          <td class="col-1" th:text="${emprestimo.dataEmprestimo}"></td>
+                          <td class="col-1" th:text="${emprestimo.dataTerminoEmprestimo}"></td>
+                          <td class="col-2">
+                            <span th:if="${emprestimo.statusAberto == true}">Aberto</span>
+                            <span th:unless="${emprestimo.statusAberto == true}">Concluído</span>
+                          </td>
+                          <td class="col-1">
+                            <button th:if="${emprestimo.statusAberto == true}">
+                                <a th:href="@{/livros/devolver/{idEmprestimo}(idEmprestimo = ${emprestimo.id})}">Devolver</a>
+                            </button>
+                          </td>
+                          <!-- <td class="col-1"><button><a th:href="@{/livros/{livroId}/pegaremprestado(livroId = ${livro.id})}">Devolver</a></button></td> -->
+                      </tr>
+                      </tbody>
+                  </table>
+              </div>
+          </div>
+
+            
+        </div>
+    </main>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+
+</body>
+</html>
