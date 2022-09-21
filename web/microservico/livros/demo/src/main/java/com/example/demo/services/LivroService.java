@@ -37,7 +37,7 @@ public class LivroService {
         estoqueAPIService.atualizarQuantidade(idEstoque, quantidade);
     }
 
-    public Estoque reservarLivroById(Long idEstoque) {
+    public Boolean reservarLivroById(Long idEstoque) {
         return estoqueAPIService.reservarLivroById(idEstoque);
     }
 

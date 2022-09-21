@@ -26,6 +26,6 @@ public class FuncionarioController {
         session.setAttribute("id", f.getId());
         session.setAttribute("tipo", "funcionario");
         
-        return new ModelAndView("redirect:/livros");
+        return new ModelAndView("redirect:/livros/funcionario");
     }
 }

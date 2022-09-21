@@ -22,7 +22,7 @@ public class EditaQuantidadeLivroController {
 
     @GetMapping("/livros/{livroId}/editaquantidade")
     public ModelAndView showEditaQuantidadeLivro(@PathVariable Long livroId, HttpSession session) {
-        ModelAndView mv = new ModelAndView("/livro/editaQuantidadeLivro");
+        ModelAndView mv = new ModelAndView("livro/editaQuantidadeLivro");
         mv.addObject("livroindex", livroId);
 
         return mv;

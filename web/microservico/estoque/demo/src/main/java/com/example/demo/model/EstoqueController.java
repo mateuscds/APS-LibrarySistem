@@ -28,6 +28,14 @@ public class EstoqueController {
         return estoqueCollection.cadastrarEstoque(estoque);
     }
 
+    public Boolean reservarByid(Long id) {
+        return estoqueCollection.reservarLivroById(id);
+    }
+    
+    public Boolean atualizaQuantidad(Long id, int quantidade) {
+        estoqueCollection.atualizarQuantidade(id, quantidade);
+        return true;
+    }
     // public ModelAndView deletarLivro(@PathVariable Long livroId, HttpSession session) {
 
     //     facade.deletarLivro(livroId);
